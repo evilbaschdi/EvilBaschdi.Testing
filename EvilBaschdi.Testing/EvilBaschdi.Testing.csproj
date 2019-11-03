@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net452;net46</TargetFrameworks>
+    <Authors>Sebastian Walter</Authors>
+    <Company>evilbaschdi (Sebastian Walter)</Company>
+    <PackageId>EvilBaschdi.Testing</PackageId>
+    <Version>$([System.DateTime]::UtcNow.AddHours(2).ToString(yyyy.M.d.Hmm))-develop</Version>
+    <Copyright>Copyright © 2015 - $([System.DateTime]::UtcNow.ToString(yyyy)) evilbaschdi</Copyright>
+    <PackageIconUrl><![CDATA[https://avatars1.githubusercontent.com/u/1897807?s=120&v=4]]></PackageIconUrl>
+    <RepositoryUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</RepositoryUrl>
+    <PackageTags>Testing</PackageTags>
+    <Description>Testing</Description>
+    <LangVersion>8</LangVersion>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EvilBaschdi.Testing.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
