@@ -9,6 +9,7 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EvilBaschdi.Testing.xml</DocumentationFile>
     <IsPackable>true</IsPackable>
     <LangVersion>8</LangVersion>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl><![CDATA[https://avatars1.githubusercontent.com/u/1897807?s=120&v=4]]></PackageIconUrl>
     <PackageId>EvilBaschdi.Testing</PackageId>
     <PackageProjectUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</PackageProjectUrl>
@@ -19,7 +20,9 @@
     <Title>EvilBaschdi.Testing</Title>
     <Version>$([System.DateTime]::UtcNow.ToString(yyyy.M.d.Hmm))-develop</Version>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Albedo" Version="2.0.0" />
     <PackageReference Include="AutoFixture" Version="4.11.0" />
@@ -33,7 +36,7 @@
     <PackageReference Include="NSubstitute" Version="4.2.1" />
     <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.11" />
     <PackageReference Include="xunit" Version="2.4.2-pre.build.4151" />
-    <PackageReference Include="xunit.analyzers" Version="0.11.0-pre.11" />
+    <PackageReference Include="xunit.analyzers" Version="0.11.0-pre.13" />
     <PackageReference Include="xunit.runner.console" Version="2.4.2-pre.build.4151">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
