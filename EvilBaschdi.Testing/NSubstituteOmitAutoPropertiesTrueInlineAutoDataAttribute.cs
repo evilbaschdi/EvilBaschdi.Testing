@@ -3,6 +3,7 @@
 namespace EvilBaschdi.Testing
 {
     /// <inheritdoc />
+    // ReSharper disable once UnusedType.Global
     public class NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute : InlineAutoDataAttribute
     {
         /// <summary>
