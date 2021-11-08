@@ -17,10 +17,11 @@
     <PackageTags>Testing</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</RepositoryUrl>
-    <TargetFrameworks>netstandard2.1;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <VersionPrefix>$([System.DateTime]::UtcNow.ToString(yyyy.M.d.Hmm))</VersionPrefix>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
@@ -30,43 +31,28 @@
     <PackageReference Include="AutoFixture.Idioms" Version="4.17.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
     <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="coverlet.collector" Version="3.1.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
     <PackageReference Include="Fare" Version="2.1.2" />
-    <PackageReference Include="FluentAssertions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.CodeCoverage" Version="16.11.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.11.0" />
-    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="16.11.0" />
+    <PackageReference Include="FluentAssertions" Version="6.2.0" />
+    <PackageReference Include="Microsoft.CodeCoverage" Version="17.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.0.0" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.0.0" />
     <PackageReference Include="NCrunch.Framework" Version="4.7.0.4" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
     <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.14" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0-preview.7.21377.19" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="System.ValueTuple" version="4.5.0" />
-    <PackageReference Include="xunit" Version="2.4.2-pre.build.4151" />
-    <PackageReference Include="xunit.analyzers" Version="0.11.0-pre.71" />
-    <PackageReference Include="xunit.runner.console" Version="2.4.2-pre.build.4151">
+    <PackageReference Include="xunit" Version="2.4.2-pre.15" />
+    <PackageReference Include="xunit.analyzers" Version="0.12.0-pre.20" />
+    <PackageReference Include="xunit.runner.console" Version="2.4.2-pre.15">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0-beta-20204-02">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.0-beta-20204-02">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.66">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0-beta-20204-02" />
+    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.0-beta-20204-02" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" />
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.66" />
   </ItemGroup>
 
 
