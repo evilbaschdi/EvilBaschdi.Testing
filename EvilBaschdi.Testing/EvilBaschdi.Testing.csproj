@@ -8,6 +8,7 @@
     <!-- ReSharper disable once UnknownProperty -->
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EvilBaschdi.Testing.xml</DocumentationFile>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>true</IsPackable>
     <LangVersion>preview</LangVersion>
     <PackageIcon>icon.png</PackageIcon>
@@ -17,7 +18,7 @@
     <PackageTags>Testing</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</RepositoryUrl>
-    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <VersionPrefix>$([System.DateTime]::UtcNow.ToString(yyyy.M.d.Hmm))</VersionPrefix>
   </PropertyGroup>
   <ItemGroup>
@@ -26,33 +27,48 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Albedo" Version="2.0.0" />
-    <PackageReference Include="AutoFixture" Version="4.17.0" />
-    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.17.0" />
-    <PackageReference Include="AutoFixture.Idioms" Version="4.17.0" />
-    <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
+    <PackageReference Include="AutoFixture" Version="5.0.0-preview0003" />
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0003" />
+    <PackageReference Include="AutoFixture.Idioms" Version="5.0.0-preview0003" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0003" />
     <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="coverlet.collector" Version="3.1.0" />
-    <PackageReference Include="Fare" Version="2.1.2" />
-    <PackageReference Include="FluentAssertions" Version="6.2.0" />
-    <PackageReference Include="Microsoft.CodeCoverage" Version="17.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.0.0" />
-    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.0.0" />
-    <PackageReference Include="NCrunch.Framework" Version="4.7.0.4" />
-    <PackageReference Include="NSubstitute" Version="4.2.2" />
-    <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.14" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-    <PackageReference Include="System.ValueTuple" version="4.5.0" />
-    <PackageReference Include="xunit" Version="2.4.2-pre.15" />
-    <PackageReference Include="xunit.analyzers" Version="0.12.0-pre.20" />
-    <PackageReference Include="xunit.runner.console" Version="2.4.2-pre.15">
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0-beta-20204-02" />
-    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.0-beta-20204-02" />
+    <PackageReference Include="Fare" Version="2.1.2" />
+    <PackageReference Include="FluentAssertions" Version="6.5.1" />
+    <PackageReference Include="Microsoft.CodeCoverage" Version="17.2.0-preview-20220131-20" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0-preview-20220131-20" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.2.0-preview-20220131-20" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.2.0-preview-20220131-20" />
+    <PackageReference Include="NCrunch.Framework" Version="4.7.0.4" />
+    <PackageReference Include="NSubstitute" Version="4.3.0" />
+    <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="7.0.0-preview.1.22076.8" />
+    <PackageReference Include="System.ValueTuple" version="4.5.0" />
+    <PackageReference Include="xunit" Version="2.4.2-pre.22" />
+    <PackageReference Include="xunit.analyzers" Version="0.12.0-pre.20" />
+    <PackageReference Include="xunit.runner.console" Version="2.4.2-pre.22">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" />
-    <PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.66" />
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 

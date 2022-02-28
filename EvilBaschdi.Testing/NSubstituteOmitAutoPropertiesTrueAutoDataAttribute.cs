@@ -2,17 +2,16 @@
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
 
-namespace EvilBaschdi.Testing
+namespace EvilBaschdi.Testing;
+
+/// <inheritdoc />
+public class NSubstituteOmitAutoPropertiesTrueAutoDataAttribute : AutoDataAttribute
 {
-    /// <inheritdoc />
-    public class NSubstituteOmitAutoPropertiesTrueAutoDataAttribute : AutoDataAttribute
+    /// <summary>
+    ///     Constructor
+    /// </summary>
+    public NSubstituteOmitAutoPropertiesTrueAutoDataAttribute()
+        : base(() => new Fixture().Customize(new OmitAutoPropertiesTrueCompositeCustomization(new AutoNSubstituteCustomization())))
     {
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        public NSubstituteOmitAutoPropertiesTrueAutoDataAttribute()
-            : base(() => new Fixture().Customize(new OmitAutoPropertiesTrueCompositeCustomization(new AutoNSubstituteCustomization())))
-        {
-        }
     }
 }
