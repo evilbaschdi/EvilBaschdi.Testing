@@ -27,12 +27,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Albedo" Version="2.0.0" />
-		<PackageReference Include="AutoFixture" Version="5.0.0-preview0003" />
-		<PackageReference Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0003" />
-		<PackageReference Include="AutoFixture.Idioms" Version="5.0.0-preview0003" />
-		<PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0003" />
+		<PackageReference Include="AutoFixture" Version="5.0.0-preview0004" />
+		<PackageReference Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0004" />
+		<PackageReference Include="AutoFixture.Idioms" Version="5.0.0-preview0004" />
+		<PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0004" />
 		<PackageReference Include="Castle.Core" Version="4.4.1" />
-		<PackageReference Include="Fare" Version="2.1.2" />
+		<PackageReference Include="Fare" Version="2.2.0" />
 		<PackageReference Include="FluentAssertions" Version="6.5.1" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
 		<PackageReference Include="Microsoft.CodeCoverage" Version="17.2.0-preview-20220301-01" />
