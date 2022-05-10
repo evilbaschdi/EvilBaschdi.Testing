@@ -6,7 +6,8 @@ namespace EvilBaschdi.Testing.Tests
     ///     Do not delete this class.
     ///     NCrunch needs at least one test method in witch <see cref="Assert" />.Equal() is used.
     /// </summary>
-    public class DummyTestDoNotDelete
+    // ReSharper disable once TestFileNameWarning
+    public class DoNotDeleteDummyTests
     {
         [Fact]
         public void Value_ToEnableUnitTests_Asserts1Equals1()
