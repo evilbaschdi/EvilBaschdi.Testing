@@ -4,6 +4,8 @@
 		<Authors>Sebastian Walter</Authors>
 		<Company>evilbaschdi (Sebastian Walter)</Company>
 		<Copyright>Copyright © 2015 - $([System.DateTime]::UtcNow.ToString(yyyy)) evilbaschdi</Copyright>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
 		<Description>Testing</Description>
 		<!-- ReSharper disable once UnknownProperty -->
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EvilBaschdi.Testing.xml</DocumentationFile>
@@ -32,7 +34,7 @@
 		<PackageReference Include="AutoFixture.Idioms" Version="5.0.0-preview0005" />
 		<PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0005" />
 		<PackageReference Include="Castle.Core" Version="5.0.0" />
-		<PackageReference Include="Fare" Version="2.2.0" />
+		<PackageReference Include="Fare" Version="2.2.1" />
 		<PackageReference Include="FluentAssertions" Version="6.7.0" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
 		<PackageReference Include="Microsoft.CodeCoverage" Version="17.3.0-preview-20220612-01" />
@@ -61,11 +63,11 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.analyzers" Version="0.12.0-pre.20">
+		<PackageReference Include="xunit.analyzers" Version="0.12.0-pre.24">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.6-preview.3">
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.6-preview.4">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
