@@ -5,6 +5,7 @@ namespace EvilBaschdi.Testing;
 /// <summary>
 ///     Class for reflection helpers
 /// </summary>
+// ReSharper disable once UnusedType.Global
 public static class GetPrivateFieldInfo
 {
     /// <summary>
@@ -14,6 +15,7 @@ public static class GetPrivateFieldInfo
     /// <param name="propertyName"></param>
     /// <param name="baseType"></param>
     /// <returns></returns>
+    // ReSharper disable once UnusedMember.Global
     public static object ValueFor(this object obj, string propertyName, Type baseType = null)
     {
         if (obj == null)
