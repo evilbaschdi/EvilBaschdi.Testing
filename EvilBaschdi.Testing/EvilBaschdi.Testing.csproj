@@ -43,7 +43,7 @@
 		<PackageReference Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0005" />
 		<PackageReference Include="AutoFixture.Idioms" Version="5.0.0-preview0005" />
 		<PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0005" />
-		<PackageReference Include="Castle.Core" Version="5.0.0" />
+		<PackageReference Include="Castle.Core" Version="5.1.0" />
 		<PackageReference Include="Fare" Version="2.2.1" />
 		<PackageReference Include="FluentAssertions" Version="6.7.0" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
@@ -56,8 +56,8 @@
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="7.0.0-preview.2.22152.2" />
 		<PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.0-preview.18571.3" />
 		<PackageReference Include="System.ValueTuple" version="4.5.0" />
-		<PackageReference Include="xunit" Version="2.4.2-pre.28" />
-		<PackageReference Include="xunit.runner.utility" Version="2.4.2-pre.28" />
+		<PackageReference Include="xunit" Version="2.4.3-pre.1" />
+		<PackageReference Include="xunit.runner.utility" Version="2.4.3-pre.1" />
 	</ItemGroup>
 	<!-- PrivateAssets that should be also be references in other projects -->
 	<ItemGroup>
@@ -73,7 +73,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.analyzers" Version="0.12.0-pre.24">
+		<PackageReference Include="xunit.analyzers" Version="1.1.0-pre.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
