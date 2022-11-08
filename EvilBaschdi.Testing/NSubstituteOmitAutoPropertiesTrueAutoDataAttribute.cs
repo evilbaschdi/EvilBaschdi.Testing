@@ -1,8 +1,4 @@
-﻿using AutoFixture;
-using AutoFixture.AutoNSubstitute;
-using AutoFixture.Xunit2;
-
-namespace EvilBaschdi.Testing;
+﻿namespace EvilBaschdi.Testing;
 
 /// <inheritdoc />
 public class NSubstituteOmitAutoPropertiesTrueAutoDataAttribute : AutoDataAttribute
