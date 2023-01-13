@@ -8,7 +8,7 @@
 		<DebugType>full</DebugType>
 		<Description>Testing</Description>
 		<!-- ReSharper disable once UnknownProperty -->
-		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EvilBaschdi.Testing.xml</DocumentationFile>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>true</IsPackable>
@@ -45,7 +45,7 @@
 		<PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0005" />
 		<PackageReference Include="Castle.Core" Version="5.1.1" />
 		<PackageReference Include="Fare" Version="2.2.1" />
-		<PackageReference Include="FluentAssertions" Version="6.8.0" />
+		<PackageReference Include="FluentAssertions" Version="6.9.0" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
 		<PackageReference Include="Microsoft.CodeCoverage" Version="17.5.0-preview-20221221-03" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0-preview-20221221-03" />
