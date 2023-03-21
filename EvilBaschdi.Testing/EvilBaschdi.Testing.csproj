@@ -4,9 +4,11 @@
 		<Authors>Sebastian Walter</Authors>
 		<Company>evilbaschdi (Sebastian Walter)</Company>
 		<Copyright>Copyright © 2015 - $([System.DateTime]::UtcNow.ToString(yyyy)) evilbaschdi</Copyright>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
 		<Description>Testing</Description>
 		<!-- ReSharper disable once UnknownProperty -->
-		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EvilBaschdi.Testing.xml</DocumentationFile>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>true</IsPackable>
@@ -18,7 +20,7 @@
 		<PackageTags>Testing</PackageTags>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</RepositoryUrl>
-		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 		<VersionPrefix>$([System.DateTime]::UtcNow.ToString(yyyy.M.d.Hmm))</VersionPrefix>
 	</PropertyGroup>
 
@@ -37,29 +39,26 @@
 
 	<ItemGroup>
 		<PackageReference Include="Albedo" Version="2.0.0" />
-		<PackageReference Include="AutoFixture" Version="5.0.0-preview0005" />
-		<PackageReference Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0005" />
-		<PackageReference Include="AutoFixture.Idioms" Version="5.0.0-preview0005" />
-		<PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0005" />
-		<PackageReference Include="Castle.Core" Version="5.1.0" />
+		<PackageReference Include="AutoFixture" Version="4.18.0" />
+		<PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.18.0" />
+		<PackageReference Include="AutoFixture.Idioms" Version="4.18.0" />
+		<PackageReference Include="AutoFixture.Xunit2" Version="4.18.0" />
+		<PackageReference Include="Castle.Core" Version="5.1.1" />
 		<PackageReference Include="Fare" Version="2.2.1" />
-		<PackageReference Include="FluentAssertions" Version="6.8.0" />
+		<PackageReference Include="FluentAssertions" Version="6.10.0" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
-		<PackageReference Include="Microsoft.CodeCoverage" Version="17.5.0-preview-20221003-04" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0-preview-20221003-04" />
-		<PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.5.0-preview-20221003-04" />
-		<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.5.0-preview-20221003-04" />
+		<PackageReference Include="Microsoft.CodeCoverage" Version="17.6.0-preview-20230223-05" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0-preview-20230223-05" />
+		<PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.6.0-preview-20230223-05" />
+		<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.6.0-preview-20230223-05" />
 		<PackageReference Include="NCrunch.Framework" Version="4.7.0.4" />
-		<PackageReference Include="NSubstitute" Version="4.4.0" />
+		<PackageReference Include="NSubstitute" Version="5.0.0" />
 		<PackageReference Include="System.Net.Http" Version="4.3.4" />
-		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="7.0.0-preview.2.22152.2" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
-		<PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.0-preview.18571.3" />
 		<PackageReference Include="System.ValueTuple" version="4.5.0" />
-		<PackageReference Include="xunit.v3" Version="0.1.1-pre.113" />
-		<PackageReference Include="xunit.v3.runner.utility" Version="0.1.1-pre.113" />
+		<PackageReference Include="xunit.v3" Version="0.1.1-pre.146" />
+		<PackageReference Include="xunit.v3.runner.utility" Version="0.1.1-pre.146" />
 	</ItemGroup>
-
 	<!-- PrivateAssets that should be also be references in other projects -->
 	<ItemGroup>
 		<PackageReference Include="coverlet.collector" Version="3.2.0">
@@ -70,15 +69,15 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.15">
+		<PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.16">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.analyzers" Version="1.1.0-pre.5">
+		<PackageReference Include="xunit.analyzers" Version="1.2.0-pre.7">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.6-preview.4">
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.6-preview.9">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -97,8 +96,12 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		
 	</ItemGroup>
 
+	<ItemGroup>
+		<Compile Update="**\*.cs">
+			<DependentUpon>$([System.String]::Copy(I%(Filename).cs))</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
 </Project>
