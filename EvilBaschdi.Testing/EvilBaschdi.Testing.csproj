@@ -14,7 +14,7 @@
 		<IsPackable>true</IsPackable>
 		<LangVersion>preview</LangVersion>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageIconUrl><![CDATA[https://avatars1.githubusercontent.com/u/1897807?s=120&v=4]]></PackageIconUrl>
+		<!--<PackageIconUrl><![CDATA[https://avatars1.githubusercontent.com/u/1897807?s=120&v=4]]></PackageIconUrl>-->
 		<PackageId>EvilBaschdi.Testing</PackageId>
 		<PackageProjectUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</PackageProjectUrl>
 		<PackageTags>Testing</PackageTags>
@@ -47,17 +47,14 @@
 		<PackageReference Include="Fare" Version="2.2.1" />
 		<PackageReference Include="FluentAssertions" Version="6.11.0" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
-		<PackageReference Include="Microsoft.CodeCoverage" Version="17.6.0-preview-20230223-05" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0-preview-20230223-05" />
-		<PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.6.0-preview-20230223-05" />
-		<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.6.0-preview-20230223-05" />
 		<PackageReference Include="NCrunch.Framework" Version="4.7.0.4" />
 		<PackageReference Include="NSubstitute" Version="5.0.0" />
 		<PackageReference Include="System.Net.Http" Version="4.3.4" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 		<PackageReference Include="System.ValueTuple" version="4.5.0" />
-		<PackageReference Include="xunit" Version="2.5.0-pre.11" />
-		<PackageReference Include="xunit.runner.utility" Version="2.5.0-pre.11" />
+		<PackageReference Include="xunit" Version="2.5.0-pre.13" />
+		<PackageReference Include="xunit.runner.utility" Version="2.5.0-pre.13" />
 	</ItemGroup>
 	<!-- PrivateAssets that should be also be references in other projects -->
 	<ItemGroup>
