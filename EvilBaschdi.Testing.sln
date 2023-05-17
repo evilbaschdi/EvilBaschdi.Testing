@@ -10,13 +10,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		.runsettings = .runsettings
 		azure-pipelines.yml = azure-pipelines.yml
 		global.json = global.json
 		NuGet.config = NuGet.config
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilBaschdi.Testing.Tests", "EvilBaschdi.Testing.Tests\EvilBaschdi.Testing.Tests.csproj", "{E3F952AB-4939-4647-B5C0-941638BB5AF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvilBaschdi.Testing.Tests", "EvilBaschdi.Testing.Tests\EvilBaschdi.Testing.Tests.csproj", "{E3F952AB-4939-4647-B5C0-941638BB5AF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

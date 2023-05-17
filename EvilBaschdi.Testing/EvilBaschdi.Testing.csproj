@@ -12,6 +12,7 @@
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IsPackable>true</IsPackable>
+		<IsTestProject>false</IsTestProject>
 		<LangVersion>preview</LangVersion>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageIconUrl><![CDATA[https://avatars1.githubusercontent.com/u/1897807?s=120&v=4]]></PackageIconUrl>
@@ -41,6 +42,10 @@
 		<AutoFixtureVersion>4.18.0</AutoFixtureVersion>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<MicrosoftTestVersion>17.6.0</MicrosoftTestVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Albedo" Version="2.0.0" />
 		<PackageReference Include="AutoFixture" Version="$(AutoFixtureVersion)" />
@@ -51,14 +56,13 @@
 		<PackageReference Include="Fare" Version="2.2.1" />
 		<PackageReference Include="FluentAssertions" Version="6.11.0" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+		<PackageReference Include="Microsoft.CodeCoverage" Version="$(MicrosoftTestVersion)" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftTestVersion)" />
+		<PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="$(MicrosoftTestVersion)" />
+		<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="$(MicrosoftTestVersion)" />
 		<PackageReference Include="NCrunch.Framework" Version="4.7.0.4" />
 		<PackageReference Include="NSubstitute" Version="5.0.0" />
-		<PackageReference Include="System.Net.Http" Version="4.3.4" />
-		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
-		<PackageReference Include="System.ValueTuple" version="4.5.0" />
 		<PackageReference Include="xunit" Version="2.5.0-pre.15" />
-		<PackageReference Include="xunit.runner.utility" Version="2.5.0-pre.15" />
 	</ItemGroup>
 	<!-- PrivateAssets that should be also be references in other projects -->
 	<ItemGroup>
@@ -86,7 +90,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.6-preview.9">
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.6-preview.10">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
