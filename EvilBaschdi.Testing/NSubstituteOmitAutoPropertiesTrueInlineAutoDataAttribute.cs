@@ -1,15 +1,12 @@
 ﻿namespace EvilBaschdi.Testing;
 
 /// <inheritdoc />
+/// <summary>
+///     Constructor
+/// </summary>
+/// <param name="values"></param>
 // ReSharper disable once UnusedType.Global
-public class NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute : InlineAutoDataAttribute
+public class NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute(params object[] values) : InlineAutoDataAttribute(new NSubstituteOmitAutoPropertiesTrueAutoDataAttribute(),
+    values)
 {
-    /// <summary>
-    ///     Constructor
-    /// </summary>
-    /// <param name="values"></param>
-    public NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute(params object[] values)
-        : base(new NSubstituteOmitAutoPropertiesTrueAutoDataAttribute(), values)
-    {
-    }
 }
