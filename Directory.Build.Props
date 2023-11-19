@@ -75,14 +75,6 @@
 		<!-- ReSharper restore VulnerablePackage -->
 	</ItemGroup>
 
-	<!-- ReSharper disable once UnknownProperty -->
-	<ItemGroup Condition="'$(IsTestProject)' != 'true'">
-		<PackageReference Include="DotNet.ReproducibleBuilds">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
 	<PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
