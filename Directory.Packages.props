@@ -5,10 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Albedo" Version="2.0.0" />
-    <PackageVersion Include="AutoFixture" Version="5.0.0-preview0006" />
-    <PackageVersion Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0006" />
-    <PackageVersion Include="AutoFixture.Idioms" Version="5.0.0-preview0006" />
-    <PackageVersion Include="AutoFixture.Xunit2" Version="5.0.0-preview0006" />
+    <PackageVersion Include="AutoFixture" Version="5.0.0-preview0007" />
+    <PackageVersion Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0007" />
+    <PackageVersion Include="AutoFixture.Idioms" Version="5.0.0-preview0007" />
+    <PackageVersion Include="AutoFixture.Xunit2" Version="5.0.0-preview0007" />
     <PackageVersion Include="Castle.Core" Version="5.1.1" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
     <PackageVersion Include="Fare" Version="2.2.1" />
