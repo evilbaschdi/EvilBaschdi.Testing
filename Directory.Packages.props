@@ -16,10 +16,10 @@
     <PackageVersion Include="FluentAssertions.Analyzers" Version="0.29.0" />
     <PackageVersion Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
     <PackageVersion Include="Meziantou.FluentAssertionsAnalyzers" Version="1.0.19" />
-    <PackageVersion Include="Microsoft.CodeCoverage" Version="17.9.0-preview-23577-04" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0-preview-23577-04" />
-    <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.9.0-preview-23577-04" />
-    <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.9.0-preview-23577-04" />
+    <PackageVersion Include="Microsoft.CodeCoverage" Version="17.9.0-release-23619-01" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0-release-23619-01" />
+    <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.9.0-release-23619-01" />
+    <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.9.0-release-23619-01" />
     <PackageVersion Include="NCrunch.Framework" Version="4.17.0.5" />
     <PackageVersion Include="NSubstitute" Version="5.1.0" />
     <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.16" />
