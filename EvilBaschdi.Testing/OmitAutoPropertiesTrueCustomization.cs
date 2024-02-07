@@ -1,6 +1,4 @@
-﻿using AutoFixture;
-
-namespace EvilBaschdi.Testing;
+﻿namespace EvilBaschdi.Testing;
 
 /// <inheritdoc />
 internal class OmitAutoPropertiesTrueCustomization : ICustomization
