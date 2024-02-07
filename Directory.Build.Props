@@ -65,10 +65,7 @@
 		<PackageReference Include="Fare" />
 		<PackageReference Include="FluentAssertions" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" />
-		<PackageReference Include="Microsoft.CodeCoverage" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
-		<PackageReference Include="Microsoft.TestPlatform.ObjectModel" />
-		<PackageReference Include="Microsoft.TestPlatform.TestHost" />
 		<PackageReference Include="NCrunch.Framework" />
 		<PackageReference Include="NSubstitute" />
 		<PackageReference Include="xunit" />
