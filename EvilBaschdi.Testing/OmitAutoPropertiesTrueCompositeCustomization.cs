@@ -1,15 +1,9 @@
-﻿using AutoFixture;
-
-namespace EvilBaschdi.Testing;
+﻿namespace EvilBaschdi.Testing;
 
 /// <inheritdoc />
-internal class OmitAutoPropertiesTrueCompositeCustomization : CompositeCustomization
+/// <summary>
+///     Constructor
+/// </summary>
+internal class OmitAutoPropertiesTrueCompositeCustomization(ICustomization customization) : CompositeCustomization(new OmitAutoPropertiesTrueCustomization(), customization)
 {
-    /// <summary>
-    ///     Constructor
-    /// </summary>
-    public OmitAutoPropertiesTrueCompositeCustomization(ICustomization customization)
-        : base(new OmitAutoPropertiesTrueCustomization(), customization)
-    {
-    }
 }
