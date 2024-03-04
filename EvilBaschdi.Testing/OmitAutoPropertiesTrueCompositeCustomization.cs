@@ -4,6 +4,7 @@
 /// <summary>
 ///     Constructor
 /// </summary>
-internal class OmitAutoPropertiesTrueCompositeCustomization(ICustomization customization) : CompositeCustomization(new OmitAutoPropertiesTrueCustomization(), customization)
+internal class OmitAutoPropertiesTrueCompositeCustomization(
+    ICustomization customization) : CompositeCustomization(new OmitAutoPropertiesTrueCustomization(), customization)
 {
 }
