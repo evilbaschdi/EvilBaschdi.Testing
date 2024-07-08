@@ -8,6 +8,4 @@
 // ReSharper disable once UnusedType.Global
 public class NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute(
     params object[] values) : InlineAutoDataAttribute(new NSubstituteOmitAutoPropertiesTrueAutoDataAttribute(),
-    values)
-{
-}
+    values);
