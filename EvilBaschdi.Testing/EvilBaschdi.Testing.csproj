@@ -39,60 +39,60 @@
 
 	<ItemGroup>
 		<PackageReference Include="Albedo" Version="2.0.0" />
-		<PackageReference Include="AutoFixture" Version="4.18.0" />
-		<PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.18.0" />
-		<PackageReference Include="AutoFixture.Idioms" Version="4.18.0" />
-		<PackageReference Include="AutoFixture.Xunit2" Version="4.18.0" />
+		<PackageReference Include="AutoFixture" Version="5.0.0-preview0011" />
+		<PackageReference Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0011" />
+		<PackageReference Include="AutoFixture.Idioms" Version="5.0.0-preview0011" />
+		<PackageReference Include="AutoFixture.Xunit2" Version="5.0.0-preview0011" />
 		<PackageReference Include="Castle.Core" Version="5.1.1" />
 		<PackageReference Include="Fare" Version="2.2.1" />
-		<PackageReference Include="FluentAssertions" Version="6.10.0" />
+		<PackageReference Include="FluentAssertions" Version="6.12.0" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
-		<PackageReference Include="Microsoft.CodeCoverage" Version="17.6.0-preview-20230223-05" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0-preview-20230223-05" />
-		<PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.6.0-preview-20230223-05" />
-		<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.6.0-preview-20230223-05" />
-		<PackageReference Include="NCrunch.Framework" Version="4.7.0.4" />
-		<PackageReference Include="NSubstitute" Version="5.0.0" />
+		<PackageReference Include="Microsoft.CodeCoverage" Version="17.10.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+		<PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.10.0" />
+		<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.10.0" />
+		<PackageReference Include="NCrunch.Framework" Version="5.1.0" />
+		<PackageReference Include="NSubstitute" Version="5.1.0" />
 		<PackageReference Include="System.Net.Http" Version="4.3.4" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 		<PackageReference Include="System.ValueTuple" version="4.5.0" />
-		<PackageReference Include="xunit.v3" Version="0.1.1-pre.146" />
-		<PackageReference Include="xunit.v3.runner.utility" Version="0.1.1-pre.146" />
+		<PackageReference Include="xunit.v3" Version="0.2.0-pre.28" />
+		<PackageReference Include="xunit.v3.runner.utility" Version="0.2.0-pre.28" />
 	</ItemGroup>
 	<!-- PrivateAssets that should be also be references in other projects -->
 	<ItemGroup>
-		<PackageReference Include="coverlet.collector" Version="3.2.0">
+		<PackageReference Include="coverlet.collector" Version="6.0.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="FluentAssertions.Analyzers" Version="0.17.2">
+		<PackageReference Include="FluentAssertions.Analyzers" Version="0.33.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.16">
+		<PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.17">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.analyzers" Version="1.2.0-pre.7">
+		<PackageReference Include="xunit.analyzers" Version="1.16.0-pre.6">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.6-preview.9">
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.0-pre.17">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 	<!-- this project only -->
 	<ItemGroup>
-		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
+		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.4">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1">
+		<PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="8.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
