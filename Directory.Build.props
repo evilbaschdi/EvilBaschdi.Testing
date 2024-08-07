@@ -69,6 +69,7 @@
 		<PackageReference Include="NCrunch.Framework" />
 		<PackageReference Include="NSubstitute" />
 		<PackageReference Include="xunit" />
+		<PackageReference Include="Xunit.Combinatorial" />
 		<!-- ReSharper restore VulnerablePackage -->
 	</ItemGroup>
 
