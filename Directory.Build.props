@@ -21,7 +21,7 @@
 		<PackageTags>Testing</PackageTags>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</RepositoryUrl>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<VersionPrefix>$([System.DateTime]::UtcNow.ToString(yyyy.M.d.Hmm))</VersionPrefix>
 	</PropertyGroup>
 
