@@ -18,10 +18,7 @@ public static class GetPrivateFieldInfo
     // ReSharper disable once UnusedMember.Global
     public static object ValueFor(this object obj, string propertyName, Type baseType = null)
     {
-        if (obj == null)
-        {
-            throw new ArgumentNullException(nameof(obj));
-        }
+        ArgumentNullException.ThrowIfNull(obj);
 
         if (string.IsNullOrWhiteSpace(propertyName))
         {
