@@ -1,6 +1,7 @@
 ﻿namespace EvilBaschdi.Testing;
 
 /// <inheritdoc />
+// ReSharper disable once UnusedType.Global
 public class NSubstituteOmitAutoPropertiesTrueAutoDataAttribute : AutoDataAttribute
 {
     /// <summary>

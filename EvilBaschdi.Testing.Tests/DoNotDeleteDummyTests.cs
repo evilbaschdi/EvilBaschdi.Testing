@@ -18,4 +18,33 @@ public class DoNotDeleteDummyTests
         // Assert
         Assert.Equal(1, 1);
     }
+
+    [Theory, NSubstituteOmitAutoPropertiesTrueAutoData]
+    public void Value_ForProvidedValues_ReturnsSum(
+        int dummyS1,
+        int dummyS2)
+    {
+        // Arrange
+        // Act
+        var result = dummyS1 + dummyS2;
+
+        // Assert
+        Assert.Equal(dummyS1 + dummyS2, result);
+    }
+
+    [Theory]
+    [NSubstituteOmitAutoPropertiesTrueInlineAutoData(1, 1, 2)]
+    [NSubstituteOmitAutoPropertiesTrueInlineAutoData(2, 2, 4)]
+    public void Value_ForProvidedInlineValues_ReturnsSum(
+        int dummyS1,
+        int dummyS2,
+        int expected)
+    {
+        // Arrange
+        // Act
+        var result = dummyS1 + dummyS2;
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
 }
