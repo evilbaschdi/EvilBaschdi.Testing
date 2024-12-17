@@ -15,6 +15,7 @@
 		<IsPackable>true</IsPackable>
 		<IsTestProject>false</IsTestProject>
 		<LangVersion>preview</LangVersion>
+		<OutputType>Exe</OutputType>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageIconUrl><![CDATA[https://avatars1.githubusercontent.com/u/1897807?s=120&v=4]]></PackageIconUrl>
 		<PackageProjectUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</PackageProjectUrl>
