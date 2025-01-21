@@ -23,7 +23,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</RepositoryUrl>
 		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
-		<VersionPrefix>$([System.DateTime]::UtcNow.ToString(yyyy.M.d.Hmm))</VersionPrefix>
+		<VersionPrefix>$([System.DateTime]::UtcNow.ToString(yyyy.M.d.H))</VersionPrefix>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -44,7 +44,6 @@
 	<PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<NoWarn>1701;1702</NoWarn>
-
 		<IsTestingPlatformApplication>false</IsTestingPlatformApplication>
 		<TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
 	</PropertyGroup>
