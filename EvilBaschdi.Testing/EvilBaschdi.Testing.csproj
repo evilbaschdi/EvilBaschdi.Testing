@@ -3,6 +3,16 @@
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
 		<IsTestProject>false</IsTestProject>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="readme.md">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="readme.md" Pack="True" PackagePath="\">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</None>
+	</ItemGroup>
 
 </Project>
