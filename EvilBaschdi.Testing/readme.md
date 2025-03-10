@@ -7,8 +7,9 @@ This package offers custom NSubstitute AutoData attributes and the required NuGe
 (Example uses Global Package Management)
 
 ```xml
-<ItemGroup>
+<ItemGroup>    
     <PackageReference Include="EvilBaschdi.Testing" />
+    <PackageReference Include="xunit.v3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="coverlet.collector">
         <PrivateAssets>all</PrivateAssets>
