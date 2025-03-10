@@ -15,6 +15,7 @@
 		<IsPackable>true</IsPackable>
 		<IsTestProject>false</IsTestProject>
 		<LangVersion>preview</LangVersion>
+		<OutputType>Exe</OutputType>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageIconUrl><![CDATA[https://avatars1.githubusercontent.com/u/1897807?s=120&v=4]]></PackageIconUrl>
 		<PackageProjectUrl>https://github.com/evilbaschdi/EvilBaschdi.Testing</PackageProjectUrl>
@@ -29,6 +30,10 @@
 
 	<ItemGroup>
 		<None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,7 +52,7 @@
 		<Using Include="AutoFixture" />
 		<Using Include="AutoFixture.AutoNSubstitute" />
 		<Using Include="AutoFixture.Idioms" />
-		<Using Include="AutoFixture.Xunit2" />
+		<Using Include="AutoFixture.Xunit3" />
 		<Using Include="EvilBaschdi.Testing" />
 		<Using Include="FluentAssertions" />
 		<Using Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" />
@@ -61,7 +66,7 @@
 		<PackageReference Include="AutoFixture" />
 		<PackageReference Include="AutoFixture.AutoNSubstitute" />
 		<PackageReference Include="AutoFixture.Idioms" />
-		<PackageReference Include="AutoFixture.Xunit2" />
+		<PackageReference Include="AutoFixture.Xunit3" />
 		<PackageReference Include="Castle.Core" />
 		<PackageReference Include="Fare" />
 		<PackageReference Include="FluentAssertions" />
@@ -69,7 +74,7 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="NCrunch.Framework" />
 		<PackageReference Include="NSubstitute" />
-		<PackageReference Include="xunit" />
+		<PackageReference Include="xunit.v3.extensibility.core" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,6 +89,7 @@
 
 	<!-- ReSharper disable once UnknownProperty -->
 	<ItemGroup>
+		<PackageReference Include="xunit.v3" />
 		<PackageReference Include="coverlet.collector">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
