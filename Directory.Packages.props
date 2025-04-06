@@ -1,32 +1,32 @@
 <Project>
-	<PropertyGroup>
-		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-		<CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageVersion Include="Albedo" Version="2.0.0" />
-		<PackageVersion Include="AutoFixture" Version="5.0.0-preview0012" />
-		<PackageVersion Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0012" />
-		<PackageVersion Include="AutoFixture.Idioms" Version="5.0.0-preview0012" />
-		<PackageVersion Include="AutoFixture.Xunit3" Version="5.0.0-preview0012" />
-		<PackageVersion Include="Castle.Core" Version="5.2.1" />
-		<PackageVersion Include="coverlet.collector" Version="6.0.4" />
-		<PackageVersion Include="Fare" Version="2.2.1" />
-		<PackageVersion Include="FluentAssertions" Version="[7.2.0,8.0.0)" />
-		<PackageVersion Include="FluentAssertions.Analyzers" Version="0.34.1" />
-		<PackageVersion Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
-		<PackageVersion Include="Meziantou.FluentAssertionsAnalyzers" Version="1.0.21" />
-		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-		<PackageVersion Include="NCrunch.Framework" Version="5.11.0" />
-		<PackageVersion Include="NSubstitute" Version="5.3.0" />
-		<PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
-		<PackageVersion Include="xunit.v3" Version="2.0.0" />
-		<PackageVersion Include="xunit.v3.extensibility.core" Version="2.0.0" />
-		<PackageVersion Include="xunit.analyzers" Version="1.20.0" />
-		<PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageVersion Include="System.Net.Http" Version="4.3.4" />
-		<PackageVersion Include="System.Text.RegularExpressions" Version="4.3.1" />
-	</ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Albedo" Version="2.0.0" />
+    <PackageVersion Include="AutoFixture" Version="5.0.0-preview0012" />
+    <PackageVersion Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0012" />
+    <PackageVersion Include="AutoFixture.Idioms" Version="5.0.0-preview0012" />
+    <PackageVersion Include="AutoFixture.Xunit3" Version="5.0.0-preview0012" />
+    <PackageVersion Include="Castle.Core" Version="5.2.1" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="Fare" Version="2.2.1" />
+    <PackageVersion Include="FluentAssertions" Version="[7.2.0,8.0.0)" />
+    <PackageVersion Include="FluentAssertions.Analyzers" Version="0.34.1" />
+    <PackageVersion Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" Version="1.0.0" />
+    <PackageVersion Include="Meziantou.FluentAssertionsAnalyzers" Version="1.0.21" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="NCrunch.Framework" Version="5.11.0" />
+    <PackageVersion Include="NSubstitute" Version="5.3.0" />
+    <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
+    <PackageVersion Include="xunit.v3" Version="2.0.1" />
+    <PackageVersion Include="xunit.v3.extensibility.core" Version="2.0.1" />
+    <PackageVersion Include="xunit.analyzers" Version="1.21.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+    <PackageVersion Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
 </Project>
