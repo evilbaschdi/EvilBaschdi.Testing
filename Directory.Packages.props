@@ -9,7 +9,7 @@
     <PackageVersion Include="AutoFixture.AutoNSubstitute" Version="5.0.0-preview0012" />
     <PackageVersion Include="AutoFixture.Idioms" Version="5.0.0-preview0012" />
     <PackageVersion Include="AutoFixture.Xunit3" Version="5.0.0-preview0012" />
-    <PackageVersion Include="Castle.Core" Version="5.2.1" />
+    <PackageVersion Include="Castle.Core" Version="[5.1.1,5.2.1)" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Fare" Version="2.2.1" />
     <PackageVersion Include="FluentAssertions" Version="[7.2.0,8.0.0)" />
@@ -20,10 +20,10 @@
     <PackageVersion Include="NCrunch.Framework" Version="5.11.0" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
-    <PackageVersion Include="xunit.v3" Version="2.0.1" />
-    <PackageVersion Include="xunit.v3.extensibility.core" Version="2.0.1" />
+    <PackageVersion Include="xunit.v3" Version="2.0.2" />
+    <PackageVersion Include="xunit.v3.extensibility.core" Version="2.0.2" />
     <PackageVersion Include="xunit.analyzers" Version="1.21.0" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="System.Net.Http" Version="4.3.4" />
