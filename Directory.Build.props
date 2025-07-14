@@ -62,13 +62,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Albedo" />
-		<PackageReference Include="AutoFixture" />
 		<PackageReference Include="AutoFixture.AutoNSubstitute" />
 		<PackageReference Include="AutoFixture.Idioms" />
 		<PackageReference Include="AutoFixture.Xunit3" />
-		<PackageReference Include="Castle.Core" />
-		<PackageReference Include="Fare" />
 		<PackageReference Include="FluentAssertions" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
