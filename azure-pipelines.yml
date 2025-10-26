@@ -18,6 +18,6 @@ resources:
 extends:
   template: buildNPackMultiStage.yml@templates  # Template reference
   parameters:
-    projectName: $(Build.Repository.Name)
+    projectName: '*'
     framework: net10.0
     projectParentDirectory: ''

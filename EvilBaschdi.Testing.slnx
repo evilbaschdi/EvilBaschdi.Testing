@@ -12,6 +12,7 @@
     <File Path="NuGet.config" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="EvilBaschdi.Testing.Tests/EvilBaschdi.Testing.Tests.csproj" />
   <Project Path="EvilBaschdi.Testing/EvilBaschdi.Testing.csproj" />
+  <Project Path="EvilBaschdi.Testing.Avalonia/EvilBaschdi.Testing.Avalonia.csproj" />
+  <Project Path="EvilBaschdi.Testing.Tests/EvilBaschdi.Testing.Tests.csproj" />
 </Solution>
