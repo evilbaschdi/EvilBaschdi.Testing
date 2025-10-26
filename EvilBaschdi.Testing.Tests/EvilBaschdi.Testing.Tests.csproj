@@ -1,7 +1,3 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<ItemGroup>
-		<ProjectReference Include="..\EvilBaschdi.Testing\EvilBaschdi.Testing.csproj" />
-	</ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
 
 </Project>
