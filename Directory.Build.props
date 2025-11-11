@@ -79,6 +79,7 @@
 	<!-- ReSharper disable once UnknownProperty -->
 	<ItemGroup>
 		<PackageReference Include="xunit.v3" />
+		<PackageReference Include="xunit.v3.runner.utility" />
 		<PackageReference Include="coverlet.collector">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
