@@ -13,20 +13,57 @@ public static class ReflectionHelper
     /// </summary>
     /// <param name="obj"></param>
     /// <param name="propertyName"></param>
-    /// <param name="baseType"></param>
     /// <returns></returns>
     // ReSharper disable once UnusedMember.Global
-    public static object GetPrivateFieldInfo(this object obj, string propertyName, Type baseType = null)
+    public static object GetPrivateMemberInfo(this object obj, string propertyName)
     {
         ArgumentNullException.ThrowIfNull(obj);
         ArgumentNullException.ThrowIfNull(propertyName);
 
-        var objType = baseType ?? obj.GetType();
-        var memberInfo = objType.GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)
-                                .FirstOrDefault(x => x.Name == propertyName);
-        return memberInfo == null
-            ? throw new ArgumentOutOfRangeException(nameof(propertyName),
-                $"Couldn't find property {propertyName} in type {objType.FullName}")
-            : ((FieldInfo)memberInfo).GetValue(obj);
+        var objType = obj.GetType();
+        var memberInfos = objType.GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+        var memberInfo = memberInfos.FirstOrDefault(x => x.Name == propertyName);
+
+        if (memberInfo == null)
+        {
+            throw new ArgumentOutOfRangeException(nameof(propertyName), $"Couldn't find property {propertyName} in type {objType.FullName}");
+        }
+
+        return memberInfo.MemberType switch
+        {
+            MemberTypes.Property => ((PropertyInfo)memberInfo).GetValue(obj),
+            MemberTypes.Field => ((FieldInfo)memberInfo).GetValue(obj),
+            _ => throw new ArgumentException($"Member {propertyName} in type {objType.FullName} is not a property or field")
+        };
+    }
+
+    /// <summary>
+    ///     Returns private member property from given object or base type
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="propertyName"></param>
+    /// <param name="objType"></param>
+    /// <returns></returns>
+    // ReSharper disable once UnusedMember.Global
+    public static object GetPrivateMemberInfo(this object obj, string propertyName, Type objType)
+    {
+        ArgumentNullException.ThrowIfNull(obj);
+        ArgumentNullException.ThrowIfNull(propertyName);
+        ArgumentNullException.ThrowIfNull(objType);
+
+        var memberInfos = objType.GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+        var memberInfo = memberInfos.FirstOrDefault(x => x.Name == propertyName);
+
+        if (memberInfo == null)
+        {
+            throw new ArgumentOutOfRangeException(nameof(propertyName), $"Couldn't find property {propertyName} in type {objType.FullName}");
+        }
+
+        return memberInfo.MemberType switch
+        {
+            MemberTypes.Property => ((PropertyInfo)memberInfo).GetValue(obj),
+            MemberTypes.Field => ((FieldInfo)memberInfo).GetValue(obj),
+            _ => throw new ArgumentException($"Member {propertyName} in type {objType.FullName} is not a property or field")
+        };
     }
 }

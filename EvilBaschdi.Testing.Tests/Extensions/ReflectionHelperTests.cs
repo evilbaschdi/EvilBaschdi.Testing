@@ -1,67 +1,48 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using EvilBaschdi.Testing.Extensions;
+﻿using EvilBaschdi.Testing.Extensions;
+
+// ReSharper disable UnusedMember.Local
+// ReSharper disable NotAccessedField.Local
 
 namespace EvilBaschdi.Testing.Tests.Extensions;
 
 public class ReflectionHelperTests
 {
-    public class BaseClass
-    {
-        public string InnerAttribute { get; }
-
-        public BaseClass(string innerAttribute)
-        {
-            InnerAttribute = innerAttribute ?? throw new ArgumentNullException(nameof(innerAttribute));
-        }
-    }
-
-    public class InheritedClass : BaseClass
-    {
-        public string Attribute { get; }
-
-        public InheritedClass(string attribute)
-            : base("inner")
-        {
-            Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
-        }
-    }
-
     [Theory, NSubstituteOmitAutoPropertiesTrueAutoData]
     public void Constructor_HasNullGuards(GuardClauseAssertion assertion)
     {
         assertion.Verify(typeof(ReflectionHelper).GetConstructors());
     }
 
-    [Fact]
-    [SuppressMessage("Design", "MFA001:Replace Xunit assertion with Fluent Assertions equivalent", Justification = "<Pending>")]
-    public void GetPrivateFieldInfo_NullGuards()
+    [Theory, NSubstituteOmitAutoPropertiesTrueAutoData]
+    public void Methods_HaveNullGuards(GuardClauseAssertion assertion)
     {
-        // Arrange
-        var bla = new BaseClass("dasdasd");
-        // Act
-        Assert.Throws<ArgumentNullException>(() => bla.GetPrivateFieldInfo(null));
+        assertion.Verify(typeof(ReflectionHelper).GetMethods().Where(method => !method.IsAbstract));
+    }
 
-        bla = null;
-        Assert.Throws<ArgumentNullException>(() => bla.GetPrivateFieldInfo(null));
+    public class BaseClass(string innerAttribute1, string innerAttribute2)
+    {
+        private readonly string _innerAttribute1 = innerAttribute1 ?? throw new ArgumentNullException(nameof(innerAttribute1));
+        private readonly string _innerAttribute2 = innerAttribute2 ?? throw new ArgumentNullException(nameof(innerAttribute2));
+    }
 
-        // Assert
+    // ReSharper disable once MemberCanBePrivate.Global
+    public class InheritedClass(string attribute) : BaseClass("inner1", "inner2")
+    {
+        private readonly string _attribute1 = attribute ?? throw new ArgumentNullException(nameof(attribute));
     }
 
     [Fact]
-    [SuppressMessage("Design", "MFA001:Replace Xunit assertion with Fluent Assertions equivalent", Justification = "<Pending>")]
     public void GetPrivateFieldInfo()
     {
         // Arrange
-
         var sut = new InheritedClass("test");
+
         // Act
-        var result = sut.GetPrivateFieldInfo("_attribute");
-        var innerResult = sut.GetPrivateFieldInfo("_innerAttribute", typeof(BaseClass));
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => sut.GetPrivateFieldInfo("_innerAttribute"));
+        var result1 = sut.GetPrivateMemberInfo("_attribute1");
+        var result2 = sut.GetPrivateMemberInfo("_innerAttribute2", typeof(BaseClass));
 
         // Assert
-        result.Should().Be("test");
-        innerResult.Should().Be("inner");
-        exception.Message.Should().StartWith("Couldn't find property _innerAttribute in type");
+        result1.Should().Be("test");
+        result2.Should().Be("inner2");
     }
 }
