@@ -43,7 +43,14 @@
 	<!-- ReSharper disable once UnknownProperty -->
 	<PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
+		<IsPackable>false</IsPackable>
+		<IsTestingPlatformApplication>false</IsTestingPlatformApplication>
+		<IsTestProject>true</IsTestProject>
 		<NoWarn>1701;1702</NoWarn>
+		<IsTestingPlatformApplication>false</IsTestingPlatformApplication>
+		<TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -66,19 +73,16 @@
 		<PackageReference Include="FluentAssertions" />
 		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+		<PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
 		<PackageReference Include="NCrunch.Framework" />
 		<PackageReference Include="NSubstitute" />
 		<PackageReference Include="xunit.v3.extensibility.core" />
 	</ItemGroup>
 
-	<PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
-		<IsPackable>false</IsPackable>
-		<IsTestProject>true</IsTestProject>
-	</PropertyGroup>
-
 	<!-- ReSharper disable once UnknownProperty -->
 	<ItemGroup>
-		<PackageReference Include="xunit.v3" />
+		<PackageReference Include="xunit.v3.mtp-v2" />
 		<PackageReference Include="xunit.v3.runner.utility" />
 		<PackageReference Include="coverlet.collector">
 			<PrivateAssets>all</PrivateAssets>
