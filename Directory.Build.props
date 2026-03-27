@@ -44,13 +44,8 @@
 	<PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<IsPackable>false</IsPackable>
-		<IsTestingPlatformApplication>false</IsTestingPlatformApplication>
 		<IsTestProject>true</IsTestProject>
-		<NoWarn>1701;1702</NoWarn>
-		<IsTestingPlatformApplication>false</IsTestingPlatformApplication>
-		<TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
-		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
-		<OutputType>Exe</OutputType>
+		<NoWarn>1701;1702</NoWarn>	
 	</PropertyGroup>
 
 	<ItemGroup>

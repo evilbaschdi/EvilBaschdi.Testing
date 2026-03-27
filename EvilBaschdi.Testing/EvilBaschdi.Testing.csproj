@@ -15,4 +15,8 @@
 		</None>
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="EvilBaschdi.Testing.Tests" />
+	</ItemGroup>
+
 </Project>
