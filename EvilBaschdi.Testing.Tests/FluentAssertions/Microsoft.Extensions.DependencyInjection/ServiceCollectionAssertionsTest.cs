@@ -206,6 +206,71 @@ public class ServiceCollectionAssertionsTest
 
     #endregion
 
+    #region Factory-based Registrations
+
+    [Fact]
+    public void ServiceCollection_Should_Contain_Singleton_With_Factory()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton>(provider => new Singleton());
+        services.Should()
+                .HaveService<ISingleton>()
+                .WithFactory()
+                .AsSingleton();
+    }
+
+    [Fact]
+    public void ServiceCollection_Should_Contain_Transient_With_Factory()
+    {
+        var services = new ServiceCollection();
+        services.AddTransient<ITransient>(provider => new Transient());
+        services.Should()
+                .HaveService<ITransient>()
+                .WithFactory()
+                .AsTransient();
+    }
+
+    [Fact]
+    public void ServiceCollection_Should_Contain_Scoped_With_Factory()
+    {
+        var services = new ServiceCollection();
+        services.AddScoped<IScoped>(provider => new Scoped());
+        services.Should()
+                .HaveService<IScoped>()
+                .WithFactory()
+                .AsScoped();
+    }
+
+    [Fact]
+    public void ServiceCollection_Should_Fail_When_Factory_Expected_But_Direct_Implementation_Registered()
+    {
+        // _services already has ISingleton registered directly (not via factory)
+        Action act = () => _services.Should()
+                                    .HaveService<ISingleton>()
+                                    .WithFactory();
+
+        // Assert
+        act.Should().Throw<XunitException>("ISingleton is registered with direct implementation, not a factory");
+    }
+
+    [Fact]
+    public void ServiceCollection_Should_Contain_Multiple_Services_With_Mixed_Registration_Types()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton>(provider => new Singleton());
+        services.AddTransient<ITransient>(provider => new Transient());
+        services.Should()
+                .HaveService<ISingleton>()
+                .WithFactory()
+                .AsSingleton()
+                .And
+                .HaveService<ITransient>()
+                .WithFactory()
+                .AsTransient();
+    }
+
+    #endregion
+
     #region Test Helpers
 
     public interface ISingleton

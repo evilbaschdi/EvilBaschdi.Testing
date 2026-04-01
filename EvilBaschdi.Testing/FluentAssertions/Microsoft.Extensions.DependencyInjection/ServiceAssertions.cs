@@ -71,6 +71,30 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
+    ///     Asserts that the service collection has a service registered with a factory function.
+    ///     This is used for services registered via AddSingleton(provider => ...), AddScoped(provider => ...), etc.
+    /// </summary>
+    /// <param name="because">
+    ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    /// </param>
+    public ServiceAssertions<TService> WithFactory(string because = "", params object[] becauseArgs)
+    {
+        if (!_filteredServices.Any(service => service.ImplementationFactory != null))
+        {
+            Execute.Assertion
+                   .BecauseOf(because, becauseArgs)
+                   .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
+                       typeof(TService));
+        }
+
+        return this;
+    }
+
+    /// <summary>
     ///     Asserts that the service collection <see cref="TService" /> are of lifespan Singleton
     /// </summary>
     /// <param name="because">
