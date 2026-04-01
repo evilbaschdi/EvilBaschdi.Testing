@@ -54,8 +54,8 @@
 		<Using Include="AutoFixture.Idioms" />
 		<Using Include="AutoFixture.Xunit3" />
 		<Using Include="EvilBaschdi.Testing" />
+		<Using Include="EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection" />
 		<Using Include="FluentAssertions" />
-		<Using Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" />
 		<Using Include="NSubstitute" />
 		<Using Include="NSubstitute.ReturnsExtensions" />
 		<Using Include="Xunit" />
@@ -66,7 +66,7 @@
 		<PackageReference Include="AutoFixture.Idioms" />
 		<PackageReference Include="AutoFixture.Xunit3" />
 		<PackageReference Include="FluentAssertions" />
-		<PackageReference Include="FluentAssertions.Microsoft.Extensions.DependencyInjection" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
 		<PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
