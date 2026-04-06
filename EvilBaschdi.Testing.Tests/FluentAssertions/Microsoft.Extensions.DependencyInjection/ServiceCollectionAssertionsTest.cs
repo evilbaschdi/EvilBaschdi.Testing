@@ -1,4 +1,3 @@
-using EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit.Sdk;
 
@@ -212,7 +211,7 @@ public class ServiceCollectionAssertionsTest
     public void ServiceCollection_Should_Contain_Singleton_With_Factory()
     {
         var services = new ServiceCollection();
-        services.AddSingleton<ISingleton>(provider => new Singleton());
+        services.AddSingleton<ISingleton>(_ => new Singleton());
         services.Should()
                 .HaveService<ISingleton>()
                 .WithFactory()
@@ -223,7 +222,7 @@ public class ServiceCollectionAssertionsTest
     public void ServiceCollection_Should_Contain_Transient_With_Factory()
     {
         var services = new ServiceCollection();
-        services.AddTransient<ITransient>(provider => new Transient());
+        services.AddTransient<ITransient>(_ => new Transient());
         services.Should()
                 .HaveService<ITransient>()
                 .WithFactory()
@@ -234,7 +233,7 @@ public class ServiceCollectionAssertionsTest
     public void ServiceCollection_Should_Contain_Scoped_With_Factory()
     {
         var services = new ServiceCollection();
-        services.AddScoped<IScoped>(provider => new Scoped());
+        services.AddScoped<IScoped>(_ => new Scoped());
         services.Should()
                 .HaveService<IScoped>()
                 .WithFactory()
@@ -257,8 +256,8 @@ public class ServiceCollectionAssertionsTest
     public void ServiceCollection_Should_Contain_Multiple_Services_With_Mixed_Registration_Types()
     {
         var services = new ServiceCollection();
-        services.AddSingleton<ISingleton>(provider => new Singleton());
-        services.AddTransient<ITransient>(provider => new Transient());
+        services.AddSingleton<ISingleton>(_ => new Singleton());
+        services.AddTransient<ITransient>(_ => new Transient());
         services.Should()
                 .HaveService<ISingleton>()
                 .WithFactory()
