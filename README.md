@@ -112,6 +112,26 @@ services.Should()
     .WithImplementation<SomeService>();
 ```
 
+#### `WithFactory()`
+
+Asserts that the service is registered with a factory function (e.g., via `AddSingleton(provider => ...)`, `AddScoped(provider => ...)`, `AddTransient(provider => ...)`).
+
+```csharp
+services.Should()
+    .HaveService<ISomeService>()
+    .WithFactory();
+```
+
+#### `WithFactory(Func<IServiceProvider, TService> expectedFactory)`
+
+Asserts that the service is registered with a specific factory function.
+
+```csharp
+services.Should()
+    .HaveService<ISomeService>()
+    .WithFactory(provider => new SomeService());
+```
+
 #### Lifetime Assertions
 
 - **`AsSingleton()`** - Asserts that the service is registered as a singleton
