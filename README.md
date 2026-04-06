@@ -43,17 +43,93 @@
 [codeFactorDevelopBadge]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/badge/develop?style=for-the-badge
 [codeFactorDevelopOverview]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/overview/develop
 
+## Installation
+
+```
+PM> Install-Package EvilBaschdi.Testing
+```
+
+## Features
+
+This library provides a comprehensive set of testing utilities and assertion extensions:
+
+- **Guard Clause Assertions** - Verify null guards on async methods
+- **Fluent Assertions for Microsoft.Extensions.DependencyInjection** - Assert service configurations
+- **FluentAssertions Extensions** - Enhanced testing for dependency injection
+
+## AutoFixture Attributes
+
+### NSubstituteOmitAutoPropertiesTrueAutoDataAttribute
+
+A custom xUnit `[Theory]` attribute that combines AutoFixture's `AutoDataAttribute` with NSubstitute automatic mocking and sets `OmitAutoProperties = true`. This means the fixture will create mocks but will not automatically populate properties—you must explicitly configure them.
+
+```csharp
+using EvilBaschdi.Testing;
+using Xunit;
+
+[Theory, NSubstituteOmitAutoPropertiesTrueAutoData]
+public void MyTest(IMyService service, MyDependency dependency)
+{
+    // service and dependency are automatically created and injected
+    // properties are not auto-populated - configure them as needed
+}
+```
+
+### NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute
+
+Combines `InlineAutoDataAttribute` with NSubstitute automatic mocking and `OmitAutoProperties = true`. Allows you to provide inline data values alongside auto-generated dependencies.
+
+```csharp
+using EvilBaschdi.Testing;
+using Xunit;
+
+[Theory]
+[NSubstituteOmitAutoPropertiesTrueInlineAutoData("value1", 42)]
+public void MyTest(string inlineValue, int inlineNumber, IMyService service)
+{
+    // inlineValue and inlineNumber come from the attribute parameters
+    // service is automatically created by the fixture
+}
+```
+
+## Guard Clause Assertions
+
+### Overview
+
+`GuardClauseAssertionExtensions` provides extension methods for verifying that all public asynchronous methods on a specified type have appropriate null guards for their reference type parameters.
+
+```csharp
+using EvilBaschdi.Testing.Extensions;
+using AutoFixture.Xunit3;
+
+[Theory, NSubstituteOmitAutoPropertiesTrueAutoData]
+public void VerifyAllAsyncMethodsHaveNullGuards(GuardClauseAssertion assertion)
+{
+    assertion.VerifyTask<MyAsyncService>(
+        typeof(MyAsyncService).GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance));
+}
+```
+
+### VerifyTask<T>
+
+Verifies that all public async methods on type `T` have null guards for their reference type parameters.
+
+```csharp
+var assertion = new GuardClauseAssertion(new Fixture());
+assertion.VerifyTask<MyService>(methodInfos);
+```
+
+- **Parameters:**
+  - `assertion` - The `GuardClauseAssertion` instance
+  - `methodInfos` - Collection of methods to verify
+- **Throws:** `GuardClauseException` if a method doesn't have proper null guards
+- **Note:** Value types and non-reference parameters are automatically skipped
+
 ## Fluent Assertions for Microsoft.Extensions.DependencyInjection
 
 This library contains fluent assertion extensions for testing `Microsoft.Extensions.DependencyInjection` service configurations.
 
 > **Note**: This library is based on [FluentAssertions.Microsoft.Extensions.DependencyInjection](https://github.com/zachdean/FluentAssertions.Microsoft.Extensions.DependencyInjection) by [zachdean](https://github.com/zachdean).
-
-### Installation
-
-```
-PM> Install-Package EvilBaschdi.Testing
-```
 
 ### Quick Start
 
