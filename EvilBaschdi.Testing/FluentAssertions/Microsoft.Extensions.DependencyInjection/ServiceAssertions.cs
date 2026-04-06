@@ -12,13 +12,13 @@ namespace EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyIn
 public class ServiceAssertions<TService>
 {
     private readonly IServiceCollection _services;
-    private readonly IEnumerable<ServiceDescriptor> _filteredServices;
+    private readonly IReadOnlyList<ServiceDescriptor> _filteredServices;
     private int _count;
 
     internal ServiceAssertions(IServiceCollection services, IEnumerable<ServiceDescriptor> filteredServices, int count)
     {
         _services = services;
-        _filteredServices = filteredServices;
+        _filteredServices = (filteredServices ?? []).ToList();
         _count = count;
     }
 
@@ -58,14 +58,40 @@ public class ServiceAssertions<TService>
         where TImplementation : TService
     {
         // ReSharper disable once SimplifyLinqExpressionUseAll
-        if (!_filteredServices.Any(service => service.ImplementationType == typeof(TImplementation)))
+        if (_filteredServices.Any(service => service.ImplementationType == typeof(TImplementation)))
         {
-            Execute.Assertion
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to have a implementation of type {0} registered, but found {1}.",
-                       typeof(TImplementation),
-                       _services.First(service => service.ImplementationType != typeof(TImplementation)).ImplementationType);
+            return this;
         }
+
+        var registered = _filteredServices.Count > 0 ? _filteredServices[0] : null;
+        object found;
+
+        if (registered == null)
+        {
+            found = "<none>";
+        }
+        else if (registered.ImplementationType != null)
+        {
+            found = registered.ImplementationType;
+        }
+        else if (registered.ImplementationInstance != null)
+        {
+            found = registered.ImplementationInstance.GetType();
+        }
+        else if (registered.ImplementationFactory != null)
+        {
+            found = "factory";
+        }
+        else
+        {
+            found = "<unknown>";
+        }
+
+        Execute.Assertion
+               .BecauseOf(because, becauseArgs)
+               .FailWith("Expected {context:services} to have an implementation of type {0} registered, but found {1}.",
+                   typeof(TImplementation),
+                   found);
 
         return this;
     }
@@ -96,7 +122,8 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
-    ///     Asserts that the service collection has a service registered with a factory function that produces the expected instance.
+    ///     Asserts that the service collection has a service registered with a factory function that produces the expected
+    ///     instance.
     ///     This is used for services registered via AddSingleton(provider => ...), AddScoped(provider => ...), etc.
     /// </summary>
     /// <param name="expectedFactory">
@@ -122,24 +149,31 @@ public class ServiceAssertions<TService>
         }
 
         var registeredService = _filteredServices.First(s => s.ImplementationFactory != null);
-        var serviceProvider = _services.BuildServiceProvider();
 
-        try
+        using var serviceProvider = _services.BuildServiceProvider();
+
+        var registeredResultObj = registeredService.ImplementationFactory!(serviceProvider);
+
+        if (registeredResultObj is not TService registeredResult)
         {
-            var registeredResult = registeredService.ImplementationFactory(serviceProvider);
-            var expectedResult = expectedFactory(serviceProvider);
-
-            if (!ReferenceEquals(registeredResult, expectedResult))
-            {
-                Execute.Assertion
-                       .BecauseOf(because, becauseArgs)
-                       .FailWith("Expected {context:services} factory for {0} to return the same instance as the expected factory, but they returned different instances.",
-                           typeof(TService));
-            }
+            var actualType = registeredResultObj?.GetType() ?? typeof(void);
+            Execute.Assertion
+                   .BecauseOf(because, becauseArgs)
+                   .FailWith("Expected {context:services} factory for {0} to return an instance of {1}, but it returned {2}.",
+                       typeof(TService),
+                       typeof(TService),
+                       actualType);
+            return this;
         }
-        finally
+
+        var expectedResult = expectedFactory(serviceProvider);
+
+        if (!ReferenceEquals(registeredResult, expectedResult))
         {
-            serviceProvider.Dispose();
+            Execute.Assertion
+                   .BecauseOf(because, becauseArgs)
+                   .FailWith("Expected {context:services} factory for {0} to return the same instance as the expected factory, but they returned different instances.",
+                       typeof(TService));
         }
 
         return this;
@@ -201,9 +235,10 @@ public class ServiceAssertions<TService>
 
     private void CheckLifetime(ServiceLifetime lifetime, string because, params object[] becauseArgs)
     {
-        if (_filteredServices.Any(service => service.Lifetime != lifetime))
+        var mismatch = _filteredServices.FirstOrDefault(x => x.Lifetime != lifetime);
+        if (mismatch != null)
         {
-            var service = _filteredServices.First(x => x.Lifetime != lifetime);
+            var service = mismatch;
             Execute.Assertion
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to have a {0} of type {1} registered, but found {2}.",
@@ -216,14 +251,14 @@ public class ServiceAssertions<TService>
     private void CheckCount(string because, params object[] becauseArgs)
     {
         //check service count
-        if (_filteredServices.Count() != _count)
+        if (_filteredServices.Count != _count)
         {
             Execute.Assertion
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to have {0} service(s) of type {1} registered, but found {2}.",
                        _count,
                        typeof(TService),
-                       _filteredServices.Count());
+                       _filteredServices.Count);
         }
     }
 }
