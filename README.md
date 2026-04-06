@@ -1,21 +1,46 @@
 # EvilBaschdi.Testing
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-MyGet Feed for NuGet Package: <https://www.myget.org/F/evilbaschdi/api/v3/index.json>
+## Source Code of EvilBaschdi.Testing
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge&)](LICENSE)
+
+### Package Feeds
+
+|                                | Feed Url                                                         |
+| :----------------------------- | :--------------------------------------------------------------- |
+| ![myget.org][myGetBadge]       | <https://www.myget.org/F/evilbaschdi/api/v3/index.json>          |
+| ![codeberg.org][codebergBadge] | <https://codeberg.org/api/packages/evilbaschdi/nuget/index.json> |
+
+### Build and Codefactor
 
 | main                                                         | develop                                                            |
 | :----------------------------------------------------------- | :----------------------------------------------------------------- |
 | ![evilbaschdi Azure DevOps Build Status][buildStatusMain]    | ![evilbaschdi Azure DevOps Build Status][buildStatusDevelop]       |
-| ![MyGet Version][myGetVersionMain]                           | ![MyGet Version][myGetVersionDevelop]                              |
 | [![CodeFactor][codeFactorMainBadge]][codeFactorMainOverview] | [![CodeFactor][codeFactorDevelopBadge]][codeFactorDevelopOverview] |
 
-[buildStatusMain]: https://dev.azure.com/evilbaschdi/Main/_apis/build/status/Core/EvilBaschdi.Testing?branchName=main
-[buildStatusDevelop]: https://dev.azure.com/evilbaschdi/Main/_apis/build/status/Core/EvilBaschdi.Testing?branchName=develop
-[myGetVersionMain]: https://img.shields.io/myget/evilbaschdi/v/EvilBaschdi.Testing?label=MyGet
-[myGetVersionDevelop]: https://img.shields.io/myget/evilbaschdi/vpre/EvilBaschdi.Testing?label=MyGet
-[codeFactorMainBadge]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/badge/main
+### Packages
+
+#### EvilBaschdi.Testing
+
+|                main                | develop                               |
+| :--------------------------------: | :------------------------------------ |
+| ![MyGet Version][myGetVersionMain] | ![MyGet Version][myGetVersionDevelop] |
+
+|                                | Package Url                                                             |
+| :----------------------------- | :---------------------------------------------------------------------- |
+| ![myget.org][myGetBadge]       | <https://myget.org/feed/evilbaschdi/package/nuget/evilbaschdi.testing>  |
+| ![codeberg.org][codebergBadge] | <https://codeberg.org/evilbaschdi/-/packages/nuget/evilbaschdi.testing> |
+
+[myGetBadge]: https://img.shields.io/badge/MyGet.org-gray?style=for-the-badge&logo=myget
+[codebergBadge]: https://img.shields.io/badge/Codeberg-gray?style=for-the-badge&logo=codeberg
+
+[buildStatusMain]: https://img.shields.io/azure-devops/build/evilbaschdi/main/20/main?style=for-the-badge
+[buildStatusDevelop]: https://img.shields.io/azure-devops/build/evilbaschdi/main/20/develop?style=for-the-badge
+[myGetVersionMain]: https://img.shields.io/myget/evilbaschdi/v/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing
+[myGetVersionDevelop]: https://img.shields.io/myget/evilbaschdi/vpre/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing
+[codeFactorMainBadge]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/badge/main?style=for-the-badge
 [codeFactorMainOverview]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/overview/main
-[codeFactorDevelopBadge]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/badge/develop
+[codeFactorDevelopBadge]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/badge/develop?style=for-the-badge
 [codeFactorDevelopOverview]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/overview/develop
 
 ## Fluent Assertions for Microsoft.Extensions.DependencyInjection
@@ -118,7 +143,3 @@ services.Should()
     .And()
     .HaveCount(3);
 ```
-
-### License
-
-Licensed under the MIT License - see LICENSE file for details.
