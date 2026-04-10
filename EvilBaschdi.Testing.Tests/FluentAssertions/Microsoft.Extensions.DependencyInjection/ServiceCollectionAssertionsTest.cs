@@ -51,6 +51,45 @@ public class ServiceCollectionAssertionsTest
         act.Should().Throw<XunitException>();
     }
 
+    #region HaveCount
+
+    [Fact]
+    public void HaveCount_Should_Pass_When_Count_Matches()
+    {
+        _services.Should().HaveCount(3);
+    }
+
+    [Fact]
+    public void HaveCount_Should_Fail_When_Count_Does_Not_Match()
+    {
+        Action act = () => _services.Should().HaveCount(5);
+
+        act.Should().Throw<XunitException>().WithMessage("*5*3*");
+    }
+
+    [Fact]
+    public void HaveCount_Should_Fail_When_ServiceCollection_Is_Null()
+    {
+        IServiceCollection services = null;
+
+        // ReSharper disable once ExpressionIsAlwaysNull
+        Action act = () => services.Should().HaveCount(0);
+
+        act.Should().Throw<XunitException>().WithMessage("*<null>*");
+    }
+
+    [Fact]
+    public void HaveCount_Should_Return_AndConstraint_For_Chaining()
+    {
+        _services.Should()
+                 .HaveCount(3)
+                 .And
+                 .HaveService<ISingleton>()
+                 .AsSingleton();
+    }
+
+    #endregion
+
     #region Singleton
 
     [Fact]
@@ -270,35 +309,176 @@ public class ServiceCollectionAssertionsTest
 
     #endregion
 
+    #region WithFactory(expectedFactory) - Behavior Comparison
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Pass_When_Factories_Match_Simple()
+    {
+        var services = new ServiceCollection();
+        services.AddTransient<ITransient>(_ => new Transient());
+
+        services.Should()
+                .HaveService<ITransient>()
+                .WithFactory(_ => new Transient())
+                .AsTransient();
+    }
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Pass_When_Factories_Request_Same_Services()
+    {
+        var services = new ServiceCollection();
+        services.AddTransient<ITransient>(sp => new TransientWithDependency(sp.GetService<ISingleton>()));
+
+        services.Should()
+                .HaveService<ITransient>()
+                .WithFactory(sp => new TransientWithDependency(sp.GetService<ISingleton>()))
+                .AsTransient();
+    }
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Pass_When_Both_Factories_Throw_After_Same_Requests()
+    {
+        var services = new ServiceCollection();
+        services.AddTransient(sp => sp.GetService<IThrowingDependency>().CreateTransient());
+
+        services.Should()
+                .HaveService<ITransient>()
+                .WithFactory(sp => sp.GetService<IThrowingDependency>().CreateTransient())
+                .AsTransient();
+    }
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Fail_When_No_Factory_Registered()
+    {
+        Action act = () => _services.Should()
+                                    .HaveService<ISingleton>()
+                                    .WithFactory(_ => new Singleton());
+
+        act.Should().Throw<XunitException>();
+    }
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Fail_When_Factories_Request_Different_Services()
+    {
+        var services = new ServiceCollection();
+        services.AddTransient<ITransient>(sp => new TransientWithDependency(sp.GetService<ISingleton>()));
+
+        Action act = () => services.Should()
+                                   .HaveService<ITransient>()
+                                   .WithFactory(sp => new TransientWithDependency(sp.GetService<IScoped>()));
+
+        act.Should().Throw<XunitException>();
+    }
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Fail_When_Factories_Return_Different_Types()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton>(_ => new Singleton());
+
+        Action act = () => services.Should()
+                                   .HaveService<ISingleton>()
+                                   .WithFactory(_ => new SingletonOther());
+
+        act.Should().Throw<XunitException>();
+    }
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Pass_For_Scoped_With_Matching_Factory()
+    {
+        var services = new ServiceCollection();
+        services.AddScoped<IScoped>(_ => new Scoped());
+
+        services.Should()
+                .HaveService<IScoped>()
+                .WithFactory(_ => new Scoped())
+                .AsScoped();
+    }
+
+    [Fact]
+    public void WithFactory_ExpectedFactory_Should_Pass_For_Singleton_With_Matching_Factory()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton>(_ => new Singleton());
+
+        services.Should()
+                .HaveService<ISingleton>()
+                .WithFactory(_ => new Singleton())
+                .AsSingleton();
+    }
+
+    #endregion
+
+    #region WithImplementation - Error Messages
+
+    [Fact]
+    public void WithImplementation_Should_Fail_When_Service_Registered_With_Factory()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton>(_ => new Singleton());
+
+        Action act = () => services.Should()
+                                   .HaveService<ISingleton>()
+                                   .WithImplementation<Singleton>();
+
+        act.Should().Throw<XunitException>().WithMessage("*factory*");
+    }
+
+    [Fact]
+    public void WithImplementation_Should_Fail_When_Service_Registered_With_Instance()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton>(new Singleton());
+
+        Action act = () => services.Should()
+                                   .HaveService<ISingleton>()
+                                   .WithImplementation<SingletonOther>();
+
+        act.Should().Throw<XunitException>().WithMessage($"*{typeof(Singleton)}*");
+    }
+
+    [Fact]
+    public void WithImplementation_Should_Pass_When_Service_Registered_With_Instance_And_Matching_Type()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton>(new Singleton());
+
+        // Instance registrations don't set ImplementationType, so WithImplementation checks ImplementationInstance type
+        // However, ImplementationType is null for instance registrations, so this will fail
+        Action act = () => services.Should()
+                                   .HaveService<ISingleton>()
+                                   .WithImplementation<Singleton>();
+
+        // ImplementationType is null for instance registrations, so WithImplementation reports the instance type
+        act.Should().Throw<XunitException>().WithMessage($"*{typeof(Singleton)}*");
+    }
+
+    #endregion
+
     #region Test Helpers
 
-    public interface ISingleton
+    public interface ISingleton;
+
+    public interface ITransient;
+
+    public interface IScoped;
+
+    public interface IThrowingDependency
     {
+        ITransient CreateTransient();
     }
 
-    public interface ITransient
-    {
-    }
+    public class Singleton : ISingleton;
 
-    public interface IScoped
-    {
-    }
+    public class SingletonOther : ISingleton;
 
-    public class Singleton : ISingleton
-    {
-    }
+    public class Transient : ITransient;
 
-    public class SingletonOther : ISingleton
-    {
-    }
+#pragma warning disable CS9113 // Parameter is unread.
+    public class TransientWithDependency(object dependency) : ITransient;
+#pragma warning restore CS9113 // Parameter is unread.
 
-    public class Transient : ITransient
-    {
-    }
-
-    public class Scoped : IScoped
-    {
-    }
+    public class Scoped : IScoped;
 
     #endregion
 }

@@ -122,12 +122,12 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
-    ///     Asserts that the service collection has a service registered with a factory function that produces the expected
-    ///     instance.
-    ///     This is used for services registered via AddSingleton(provider => ...), AddScoped(provider => ...), etc.
+    ///     Asserts that the service collection has a service registered with a factory function that behaves equivalently
+    ///     to the expected factory. Comparison is done by verifying that both factories request the same services from the
+    ///     <see cref="IServiceProvider" /> and produce the same result type, without requiring real dependency resolution.
     /// </summary>
     /// <param name="expectedFactory">
-    ///     A factory function that produces the expected instance to compare against the registered factory.
+    ///     A factory function whose behavior (requested services and result type) is compared against the registered factory.
     /// </param>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
@@ -150,33 +150,59 @@ public class ServiceAssertions<TService>
 
         var registeredService = _filteredServices.First(s => s.ImplementationFactory != null);
 
-        using var serviceProvider = _services.BuildServiceProvider();
+        var registeredRecorder = new ServiceRequestRecorder();
+        var expectedRecorder = new ServiceRequestRecorder();
 
-        var registeredResultObj = registeredService.ImplementationFactory!(serviceProvider);
+        var (registeredResultType, registeredError) = InvokeFactory(sp => registeredService.ImplementationFactory!(sp), registeredRecorder);
+        var (expectedResultType, expectedError) = InvokeFactory(sp => expectedFactory(sp), expectedRecorder);
 
-        if (registeredResultObj is not TService registeredResult)
+        if (!registeredRecorder.RequestedServiceTypes.SequenceEqual(expectedRecorder.RequestedServiceTypes))
         {
-            var actualType = registeredResultObj?.GetType() ?? typeof(void);
             Execute.Assertion
                    .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} factory for {0} to return an instance of {1}, but it returned {2}.",
+                   .FailWith("Expected {context:services} factory for {0} to request services [{1}], but it requested [{2}].",
                        typeof(TService),
-                       typeof(TService),
-                       actualType);
-            return this;
+                       string.Join(", ", expectedRecorder.RequestedServiceTypes.Select(t => t.FullName)),
+                       string.Join(", ", registeredRecorder.RequestedServiceTypes.Select(t => t.FullName)));
         }
 
-        var expectedResult = expectedFactory(serviceProvider);
-
-        if (!ReferenceEquals(registeredResult, expectedResult))
+        if (registeredError == null && expectedError == null && registeredResultType != expectedResultType)
         {
             Execute.Assertion
                    .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} factory for {0} to return the same instance as the expected factory, but they returned different instances.",
-                       typeof(TService));
+                   .FailWith("Expected {context:services} factory for {0} to return type {1}, but it returned {2}.",
+                       typeof(TService),
+                       expectedResultType,
+                       registeredResultType);
         }
 
         return this;
+    }
+
+    private static (Type ResultType, Exception Error) InvokeFactory(Func<IServiceProvider, object> factory, IServiceProvider provider)
+    {
+        try
+        {
+            var result = factory(provider);
+            return (result?.GetType(), null);
+        }
+        catch (Exception ex)
+        {
+            return (null, ex);
+        }
+    }
+
+    private sealed class ServiceRequestRecorder : IServiceProvider
+    {
+        private readonly List<Type> _requestedServiceTypes = [];
+
+        public IReadOnlyList<Type> RequestedServiceTypes => _requestedServiceTypes;
+
+        public object GetService(Type serviceType)
+        {
+            _requestedServiceTypes.Add(serviceType);
+            return null;
+        }
     }
 
     /// <summary>

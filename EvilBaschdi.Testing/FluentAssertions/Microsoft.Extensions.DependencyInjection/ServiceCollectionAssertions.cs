@@ -41,8 +41,8 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
     /// </param>
     public AndConstraint<ServiceCollectionAssertions> HaveCount(int expected, string because = "", params object[] becauseArgs)
     {
-        //had to take the HaveCount function from fluent asserts library since IServiceCollection is not explicitlly 
-        //Ienumerable<TService> see: https://github.com/fluentassertions/fluentassertions/blob/develop/Src/FluentAssertions/Collections/NonGenericCollectionAssertions.cs
+        //had to take the HaveCount function from fluent asserts library since IServiceCollection is not explicitlly
+        //IEnumerable<TService> see: https://github.com/fluentassertions/fluentassertions/blob/develop/Src/FluentAssertions/Collections/NonGenericCollectionAssertions.cs
         if (Subject is null)
         {
             Execute.Assertion
