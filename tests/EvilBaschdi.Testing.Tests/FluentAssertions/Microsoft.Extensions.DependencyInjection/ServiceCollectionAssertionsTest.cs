@@ -1,6 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Xunit.Sdk;
 
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace EvilBaschdi.Testing.Tests.FluentAssertions.Microsoft.Extensions.DependencyInjection;
 
 public class ServiceCollectionAssertionsTest
