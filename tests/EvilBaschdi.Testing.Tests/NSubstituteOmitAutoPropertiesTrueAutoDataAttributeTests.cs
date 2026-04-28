@@ -18,8 +18,8 @@ public class NSubstituteOmitAutoPropertiesTrueAutoDataAttributeTests
     public void Methods_HaveNullGuards(GuardClauseAssertion assertion)
     {
         assertion.Verify(typeof(NSubstituteOmitAutoPropertiesTrueAutoDataAttribute).GetMethods()
-            .Where(method =>
-                !method.IsAbstract &&
-                method.DeclaringType == typeof(NSubstituteOmitAutoPropertiesTrueAutoDataAttribute)));
+                                                                                   .Where(method =>
+                                                                                              !method.IsAbstract &&
+                                                                                              method.DeclaringType == typeof(NSubstituteOmitAutoPropertiesTrueAutoDataAttribute)));
     }
 }

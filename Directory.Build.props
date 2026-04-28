@@ -45,7 +45,7 @@
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
-		<NoWarn>1701;1702</NoWarn>	
+		<NoWarn>1701;1702</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
