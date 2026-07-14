@@ -13,6 +13,7 @@
 		<None Include="readme.md" Pack="True" PackagePath="\">
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</None>
+		<None Include="buildTransitive\EvilBaschdi.Testing.props" Pack="true" Visible="false" PackagePath="buildTransitive\$(PackageId).props" />
 	</ItemGroup>
 
 	<ItemGroup>

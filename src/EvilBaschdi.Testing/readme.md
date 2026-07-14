@@ -7,7 +7,31 @@ This package offers custom NSubstitute AutoData attributes and the required NuGe
 (Example uses Global Package Management)
 
 ```xml
-<ItemGroup>    
+<!-- Optional: disable auto global usings imported by EvilBaschdi.Testing.props -->
+<PropertyGroup>
+  <EvilBaschdiTestingApplyTestDefaults>false</EvilBaschdiTestingApplyTestDefaults>
+  <EvilBaschdiTestingEnableGlobalUsings>false</EvilBaschdiTestingEnableGlobalUsings>
+</PropertyGroup>
+
+<PropertyGroup>
+  <OutputType>Exe</OutputType>
+</PropertyGroup>
+
+<ItemGroup>
+    <Using Include="AutoFixture" />
+    <Using Include="AutoFixture.AutoNSubstitute" />
+    <Using Include="AutoFixture.Idioms" />
+    <Using Include="AutoFixture.Xunit3" />
+    <Using Include="EvilBaschdi.Testing" />
+    <Using Include="EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection" />
+    <Using Include="FluentAssertions" />
+    <Using Include="NSubstitute" />
+    <Using Include="NSubstitute.Arg" Alias="Arg" />
+    <Using Include="NSubstitute.ReturnsExtensions" />
+    <Using Include="Xunit" />
+</ItemGroup>
+
+<ItemGroup>
     <PackageReference Include="EvilBaschdi.Testing" />
     <PackageReference Include="xunit.v3.mtp-v2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />

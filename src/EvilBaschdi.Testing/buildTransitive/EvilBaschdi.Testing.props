@@ -1,0 +1,35 @@
+<Project>
+
+	<PropertyGroup>
+		<EvilBaschdiTestingApplyTestDefaults Condition="'$(EvilBaschdiTestingApplyTestDefaults)' == ''">true</EvilBaschdiTestingApplyTestDefaults>
+		<EvilBaschdiTestingEnableGlobalUsings Condition="'$(EvilBaschdiTestingEnableGlobalUsings)' == ''">true</EvilBaschdiTestingEnableGlobalUsings>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);NU1608</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(EvilBaschdiTestingApplyTestDefaults)' == 'true' and '$(IsTestProject)' == 'true'">
+		<GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">false</GenerateDocumentationFile>
+		<IsPackable Condition="'$(IsPackable)' == ''">false</IsPackable>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(IsTestProject)' == 'true' and '$(OutputType)' == ''">
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(IsTestProject)' == 'true' and '$(EvilBaschdiTestingEnableGlobalUsings)' == 'true'">
+		<Using Include="AutoFixture" />
+		<Using Include="AutoFixture.AutoNSubstitute" />
+		<Using Include="AutoFixture.Idioms" />
+		<Using Include="AutoFixture.Xunit3" />
+		<Using Include="EvilBaschdi.Testing" />
+		<Using Include="EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection" />
+		<Using Include="FluentAssertions" />
+		<Using Include="NSubstitute" />
+		<Using Include="NSubstitute.Arg" Alias="Arg" />
+		<Using Include="NSubstitute.ReturnsExtensions" />
+		<Using Include="Xunit" />
+	</ItemGroup>
+
+</Project>
