@@ -1,4 +1,4 @@
-﻿namespace EvilBaschdi.Testing;
+namespace EvilBaschdi.Testing;
 
 /// <inheritdoc />
 /// <summary>

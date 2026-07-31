@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using EvilBaschdi.Testing.Extensions;
 
 // ReSharper disable All

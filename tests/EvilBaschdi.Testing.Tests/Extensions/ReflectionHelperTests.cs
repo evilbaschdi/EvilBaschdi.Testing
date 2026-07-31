@@ -1,4 +1,4 @@
-﻿using EvilBaschdi.Testing.Extensions;
+using EvilBaschdi.Testing.Extensions;
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable NotAccessedField.Local

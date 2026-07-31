@@ -1,4 +1,4 @@
-﻿namespace EvilBaschdi.Testing.Tests;
+namespace EvilBaschdi.Testing.Tests;
 
 public class NSubstituteOmitAutoPropertiesTrueAutoDataAttributeTests
 {
