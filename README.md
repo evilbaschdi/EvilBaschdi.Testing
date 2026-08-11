@@ -3,47 +3,34 @@
 ## Source Code of EvilBaschdi.Testing
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge&)](LICENSE)
-![Commit Activity](https://img.shields.io/github/commit-activity/m/evilbaschdi/evilbaschdi.testing?style=for-the-badge&)
-![Last Commit](https://img.shields.io/github/last-commit/evilbaschdi/evilbaschdi.testing?style=for-the-badge&)
 
 ### Package Feeds
 
-|                                | Feed Url                                                         |
+Default by `NuGet.config` is myget.org
+
+| Feed                           | Feed Url                                                         |
 | :----------------------------- | :--------------------------------------------------------------- |
 | ![myget.org][myGetBadge]       | <https://www.myget.org/F/evilbaschdi/api/v3/index.json>          |
 | ![codeberg.org][codebergBadge] | <https://codeberg.org/api/packages/evilbaschdi/nuget/index.json> |
 
-### Build and Codefactor
+### Quality & Activity
 
-| main                                                         | develop                                                            |
-| :----------------------------------------------------------- | :----------------------------------------------------------------- |
-| ![evilbaschdi Azure DevOps Build Status][buildStatusMain]    | ![evilbaschdi Azure DevOps Build Status][buildStatusDevelop]       |
-| [![CodeFactor][codeFactorMainBadge]][codeFactorMainOverview] | [![CodeFactor][codeFactorDevelopBadge]][codeFactorDevelopOverview] |
+| Branch                                | Status & Activity                                                                                                                                                        |
+| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Main Branch][mainBranchBadge]       | [![CodeFactor][codeFactorMainBadge]][codeFactorMainOverview] ![Commit Activity Main][commitActivityMainBadge] ![Last Commit Main][lastCommitMainBadge]                   |
+| ![Develop Branch][developBranchBadge] | [![CodeFactor][codeFactorDevelopBadge]][codeFactorDevelopOverview] ![Commit Activity Develop][commitActivityDevelopBadge] ![Last Commit Develop][lastCommitDevelopBadge] |
 
 ### Packages
 
-#### EvilBaschdi.Testing
+| Branch                                | Version                               |
+| :------------------------------------ | :------------------------------------ |
+| ![Main Branch][mainBranchBadge]       | ![MyGet Version][myGetVersionMain]    |
+| ![Develop Branch][developBranchBadge] | ![MyGet Version][myGetVersionDevelop] |
 
-|                main                | develop                               |
-| :--------------------------------: | :------------------------------------ |
-| ![MyGet Version][myGetVersionMain] | ![MyGet Version][myGetVersionDevelop] |
-
-|                                | Package Url                                                             |
+| Feed                           | Package Url                                                             |
 | :----------------------------- | :---------------------------------------------------------------------- |
-| ![myget.org][myGetBadge]       | <https://myget.org/feed/evilbaschdi/package/nuget/evilbaschdi.testing>  |
-| ![codeberg.org][codebergBadge] | <https://codeberg.org/evilbaschdi/-/packages/nuget/evilbaschdi.testing> |
-
-[myGetBadge]: https://img.shields.io/badge/MyGet.org-gray?style=for-the-badge&logo=myget
-[codebergBadge]: https://img.shields.io/badge/Codeberg-gray?style=for-the-badge&logo=codeberg
-
-[buildStatusMain]: https://img.shields.io/azure-devops/build/evilbaschdi/main/20/main?style=for-the-badge
-[buildStatusDevelop]: https://img.shields.io/azure-devops/build/evilbaschdi/main/20/develop?style=for-the-badge
-[myGetVersionMain]: https://img.shields.io/myget/evilbaschdi/v/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing
-[myGetVersionDevelop]: https://img.shields.io/myget/evilbaschdi/vpre/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing
-[codeFactorMainBadge]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/badge/main?style=for-the-badge
-[codeFactorMainOverview]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/overview/main
-[codeFactorDevelopBadge]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/badge/develop?style=for-the-badge
-[codeFactorDevelopOverview]: https://www.codefactor.io/repository/github/evilbaschdi/evilbaschdi.testing/overview/develop
+| ![myget.org][myGetBadge]       | <https://myget.org/feed/evilbaschdi/package/nuget/EvilBaschdi.Testing>  |
+| ![codeberg.org][codebergBadge] | <https://codeberg.org/evilbaschdi/-/packages/nuget/EvilBaschdi.Testing> |
 
 ## Installation
 
@@ -241,3 +228,21 @@ services.Should()
     .And()
     .HaveCount(3);
 ```
+
+[myGetBadge]: https://img.shields.io/badge/MyGet.org-gray?style=for-the-badge&logo=myget
+[codebergBadge]: https://img.shields.io/badge/Codeberg-gray?style=for-the-badge&logo=codeberg
+
+[mainBranchBadge]: https://img.shields.io/badge/branch-main-brightgreen?style=for-the-badge&logo=git&logoColor=white&color=c9ff00
+[developBranchBadge]: https://img.shields.io/badge/branch-develop-blue?style=for-the-badge&logo=git&logoColor=white&color=0080ff
+
+[codeFactorMainBadge]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/main?style=for-the-badge
+[codeFactorMainOverview]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/main
+[commitActivityMainBadge]: https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/main?style=for-the-badge
+[lastCommitMainBadge]: https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/main?style=for-the-badge
+[myGetVersionMain]: https://img.shields.io/myget/evilbaschdi/v/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing
+
+[codeFactorDevelopBadge]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/develop?style=for-the-badge
+[codeFactorDevelopOverview]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/develop
+[commitActivityDevelopBadge]: https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/develop?style=for-the-badge
+[lastCommitDevelopBadge]: https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/develop?style=for-the-badge
+[myGetVersionDevelop]: https://img.shields.io/myget/evilbaschdi/vpre/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing
