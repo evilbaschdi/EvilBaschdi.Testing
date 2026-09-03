@@ -37,7 +37,7 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public AndConstraint<ServiceCollectionAssertions> HaveCount(int expected, string because = "", params object[] becauseArgs)
     {
@@ -71,7 +71,7 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public ServiceAssertions<TService> HaveService<TService>(string because = "", params object[] becauseArgs)
     {

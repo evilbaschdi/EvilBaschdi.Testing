@@ -1,56 +1,108 @@
+<!-- markdownlint-disable MD033 -->
 # EvilBaschdi.Testing
 
-## Source Code of EvilBaschdi.Testing
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Target: .NET 10.0](https://img.shields.io/badge/.NET-10.0-512bd4.svg?style=for-the-badge&logo=dotnet)](Directory.Build.props)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge&)](LICENSE)
+Testing utilities, AutoFixture extensions, custom assertions, and FluentAssertions extensions for .NET and Microsoft.Extensions.DependencyInjection.
 
-### Package Feeds
+---
 
-Default by `NuGet.config` is myget.org
+## 📈 Quality & Activity
 
-| Feed                           | Feed Url                                                         |
-| :----------------------------- | :--------------------------------------------------------------- |
-| ![myget.org][myGetBadge]       | <https://www.myget.org/F/evilbaschdi/api/v3/index.json>          |
-| ![codeberg.org][codebergBadge] | <https://codeberg.org/api/packages/evilbaschdi/nuget/index.json> |
+| Branch | Status & Activity |
+| :--- | :--- |
+| ![Main](https://img.shields.io/badge/branch-main-brightgreen?style=flat-square&logo=git&logoColor=white&color=c9ff00) | [![CodeFactor](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/main?style=flat-square)](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/main) ![Commit Activity Main](https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/main?style=flat-square) ![Last Commit Main](https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/main?style=flat-square) |
+| ![Develop](https://img.shields.io/badge/branch-develop-blue?style=flat-square&logo=git&logoColor=white&color=0080ff) | [![CodeFactor](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/develop?style=flat-square)](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/develop) ![Commit Activity Develop](https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/develop?style=flat-square) ![Last Commit Develop](https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/develop?style=flat-square) |
 
-### Quality & Activity
+---
 
-| Branch                                | Status & Activity                                                                                                                                                        |
-| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Main Branch][mainBranchBadge]       | [![CodeFactor][codeFactorMainBadge]][codeFactorMainOverview] ![Commit Activity Main][commitActivityMainBadge] ![Last Commit Main][lastCommitMainBadge]                   |
-| ![Develop Branch][developBranchBadge] | [![CodeFactor][codeFactorDevelopBadge]][codeFactorDevelopOverview] ![Commit Activity Develop][commitActivityDevelopBadge] ![Last Commit Develop][lastCommitDevelopBadge] |
+## 📦 Packages in this Repository
 
-### Packages
+| Package | Description | Sources |
+| :--- | :--- | :--- |
+| [`EvilBaschdi.Testing`](src/EvilBaschdi.Testing) | AutoFixture custom data attributes, GuardClause assertions, and DI assertion extensions. | [![MyGet](https://img.shields.io/badge/MyGet-gray?style=flat-square&logo=myget)](https://myget.org/feed/evilbaschdi/package/nuget/EvilBaschdi.Testing) [![Codeberg](https://img.shields.io/badge/Codeberg-gray?style=flat-square&logo=codeberg)](https://codeberg.org/evilbaschdi/-/packages/nuget/EvilBaschdi.Testing) |
 
-| Branch                                | Version                               |
-| :------------------------------------ | :------------------------------------ |
-| ![Main Branch][mainBranchBadge]       | ![MyGet Version][myGetVersionMain]    |
-| ![Develop Branch][developBranchBadge] | ![MyGet Version][myGetVersionDevelop] |
+---
 
-| Feed                           | Package Url                                                             |
-| :----------------------------- | :---------------------------------------------------------------------- |
-| ![myget.org][myGetBadge]       | <https://myget.org/feed/evilbaschdi/package/nuget/EvilBaschdi.Testing>  |
-| ![codeberg.org][codebergBadge] | <https://codeberg.org/evilbaschdi/-/packages/nuget/EvilBaschdi.Testing> |
+## 🚀 Package Feeds
 
-## Installation
+All packages (Release and Preview builds) are published to **MyGet** and **Codeberg**. You only need to configure **one** of these feeds.
 
+| Registry | Feed URL |
+| :--- | :--- |
+| **MyGet** | `https://www.myget.org/F/evilbaschdi/api/v3/index.json` |
+| **Codeberg** | `https://codeberg.org/api/packages/evilbaschdi/nuget/index.json` |
+
+### Add Feed via .NET CLI
+
+Choose either MyGet or Codeberg:
+
+```bash
+# Option A: MyGet (recommended)
+dotnet nuget add source https://www.myget.org/F/evilbaschdi/api/v3/index.json -n "EvilBaschdi MyGet"
+
+# Option B: Codeberg
+dotnet nuget add source https://codeberg.org/api/packages/evilbaschdi/nuget/index.json -n "EvilBaschdi Codeberg"
 ```
-PM> Install-Package EvilBaschdi.Testing
+
+<details>
+<summary><b>Sample <code>NuGet.Config</code> with Package Source Mapping</b></summary>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <clear />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+    <!-- Choose one of the following feeds: -->
+    <add key="EvilBaschdi MyGet" value="https://www.myget.org/F/evilbaschdi/api/v3/index.json" />
+    <!-- <add key="EvilBaschdi Codeberg" value="https://codeberg.org/api/packages/evilbaschdi/nuget/index.json" /> -->
+  </packageSources>
+
+  <packageSourceMapping>
+    <packageSource key="nuget.org">
+      <package pattern="*" />
+    </packageSource>
+    <packageSource key="EvilBaschdi MyGet">
+      <package pattern="EvilBaschdi.*" />
+    </packageSource>
+    <!-- <packageSource key="EvilBaschdi Codeberg">
+      <package pattern="EvilBaschdi.*" />
+    </packageSource> -->
+  </packageSourceMapping>
+</configuration>
 ```
 
-## Features
+</details>
 
-This library provides a comprehensive set of testing utilities and assertion extensions:
+---
 
-- **Guard Clause Assertions** - Verify null guards on async methods
-- **Fluent Assertions for Microsoft.Extensions.DependencyInjection** - Assert service configurations
-- **FluentAssertions Extensions** - Enhanced testing for dependency injection
+## 📥 Installation
 
-## AutoFixture Attributes
+Install any package via `dotnet add package`:
 
-### NSubstituteOmitAutoPropertiesTrueAutoDataAttribute
+### Standard Release
 
-A custom xUnit `[Theory]` attribute that combines AutoFixture's `AutoDataAttribute` with NSubstitute automatic mocking and sets `OmitAutoProperties = true`. This means the fixture will create mocks but will not automatically populate properties—you must explicitly configure them.
+```bash
+dotnet add package EvilBaschdi.Testing
+```
+
+### Preview Builds
+
+```bash
+dotnet add package EvilBaschdi.Testing --prerelease
+```
+
+---
+
+## 💡 Features & Usage
+
+### AutoFixture Attributes
+
+#### `NSubstituteOmitAutoPropertiesTrueAutoDataAttribute`
+
+A custom xUnit `[Theory]` attribute combining AutoFixture's `AutoDataAttribute` with NSubstitute automatic mocking and `OmitAutoProperties = true`.
 
 ```csharp
 using EvilBaschdi.Testing;
@@ -64,9 +116,9 @@ public void MyTest(IMyService service, MyDependency dependency)
 }
 ```
 
-### NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute
+#### `NSubstituteOmitAutoPropertiesTrueInlineAutoDataAttribute`
 
-Combines `InlineAutoDataAttribute` with NSubstitute automatic mocking and `OmitAutoProperties = true`. Allows you to provide inline data values alongside auto-generated dependencies.
+Combines `InlineAutoDataAttribute` with NSubstitute automatic mocking and `OmitAutoProperties = true`.
 
 ```csharp
 using EvilBaschdi.Testing;
@@ -81,11 +133,9 @@ public void MyTest(string inlineValue, int inlineNumber, IMyService service)
 }
 ```
 
-## Guard Clause Assertions
+### Guard Clause Assertions
 
-### Overview
-
-`GuardClauseAssertionExtensions` provides extension methods for verifying that all public asynchronous methods on a specified type have appropriate null guards for their reference type parameters.
+Verifies that public asynchronous methods on a type have proper null guards for reference parameters:
 
 ```csharp
 using EvilBaschdi.Testing.Extensions;
@@ -99,28 +149,9 @@ public void VerifyAllAsyncMethodsHaveNullGuards(GuardClauseAssertion assertion)
 }
 ```
 
-### VerifyTask<T>
+### Fluent Assertions for `Microsoft.Extensions.DependencyInjection`
 
-Verifies that all public async methods on type `T` have null guards for their reference type parameters.
-
-```csharp
-var assertion = new GuardClauseAssertion(new Fixture());
-assertion.VerifyTask<MyService>(methodInfos);
-```
-
-- **Parameters:**
-  - `assertion` - The `GuardClauseAssertion` instance
-  - `methodInfos` - Collection of methods to verify
-- **Throws:** `GuardClauseException` if a method doesn't have proper null guards
-- **Note:** Value types and non-reference parameters are automatically skipped
-
-## Fluent Assertions for Microsoft.Extensions.DependencyInjection
-
-This library contains fluent assertion extensions for testing `Microsoft.Extensions.DependencyInjection` service configurations.
-
-> **Note**: This library is based on [FluentAssertions.Microsoft.Extensions.DependencyInjection](https://github.com/zachdean/FluentAssertions.Microsoft.Extensions.DependencyInjection) by [zachdean](https://github.com/zachdean).
-
-### Quick Start
+Assert service registrations with lifetime and implementation validations:
 
 ```csharp
 using EvilBaschdi.Testing;
@@ -132,117 +163,9 @@ services.AddSingleton<ISomeService, SomeService>();
 services.AddTransient<ITransient, Transient>();
 services.AddScoped<IScoped, Scoped>();
 
-// Assert that a service is registered with the correct implementation and lifetime
+// Assert registration, implementation, and lifetime
 services.Should()
     .HaveService<ISomeService>()
     .WithImplementation<SomeService>()
     .AsSingleton();
 ```
-
-### API Reference
-
-#### `HaveCount(int expected)`
-
-Asserts that the service collection contains the expected number of service registrations.
-
-```csharp
-services.Should().HaveCount(5);
-```
-
-#### `HaveService<TService>()`
-
-Asserts that a service of type `TService` is registered in the service collection.
-
-```csharp
-services.Should().HaveService<ISomeService>();
-```
-
-#### `WithCount(int expected)`
-
-Asserts that the service is registered a specific number of times. Can be chained before lifetime assertions.
-
-```csharp
-services.Should()
-    .HaveService<ISomeService>()
-    .WithCount(2);
-```
-
-#### `WithImplementation<TImplementation>()`
-
-Asserts that the service is registered with a specific implementation type. Can be chained for multiple implementations.
-
-```csharp
-services.Should()
-    .HaveService<ISomeService>()
-    .WithImplementation<SomeService>();
-```
-
-#### `WithFactory()`
-
-Asserts that the service is registered with a factory function (e.g., via `AddSingleton(provider => ...)`, `AddScoped(provider => ...)`, `AddTransient(provider => ...)`).
-
-```csharp
-services.Should()
-    .HaveService<ISomeService>()
-    .WithFactory();
-```
-
-#### `WithFactory(Func<IServiceProvider, TService> expectedFactory)`
-
-Asserts that the service is registered with a specific factory function.
-
-```csharp
-services.Should()
-    .HaveService<ISomeService>()
-    .WithFactory(provider => new SomeService());
-```
-
-#### Lifetime Assertions
-
-- **`AsSingleton()`** - Asserts that the service is registered as a singleton
-- **`AsScoped()`** - Asserts that the service is registered as scoped
-- **`AsTransient()`** - Asserts that the service is registered as transient
-
-```csharp
-services.Should()
-    .HaveService<ISomeService>()
-    .AsSingleton();
-
-services.Should()
-    .HaveService<IRepository>()
-    .AsTransient();
-
-services.Should()
-    .HaveService<IUnitOfWork>()
-    .AsScoped();
-```
-
-#### Method Chaining with `And()`
-
-Chain multiple assertions together:
-
-```csharp
-services.Should()
-    .HaveService<ISomeService>()
-    .AsSingleton()
-    .And()
-    .HaveCount(3);
-```
-
-[myGetBadge]: https://img.shields.io/badge/MyGet.org-gray?style=for-the-badge&logo=myget
-[codebergBadge]: https://img.shields.io/badge/Codeberg-gray?style=for-the-badge&logo=codeberg
-
-[mainBranchBadge]: https://img.shields.io/badge/branch-main-brightgreen?style=for-the-badge&logo=git&logoColor=white&color=c9ff00
-[developBranchBadge]: https://img.shields.io/badge/branch-develop-blue?style=for-the-badge&logo=git&logoColor=white&color=0080ff
-
-[codeFactorMainBadge]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/main?style=for-the-badge
-[codeFactorMainOverview]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/main
-[commitActivityMainBadge]: https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/main?style=for-the-badge
-[lastCommitMainBadge]: https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/main?style=for-the-badge
-[myGetVersionMain]: https://img.shields.io/myget/evilbaschdi/v/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing
-
-[codeFactorDevelopBadge]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/develop?style=for-the-badge
-[codeFactorDevelopOverview]: https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/develop
-[commitActivityDevelopBadge]: https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/develop?style=for-the-badge
-[lastCommitDevelopBadge]: https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/develop?style=for-the-badge
-[myGetVersionDevelop]: https://img.shields.io/myget/evilbaschdi/vpre/EvilBaschdi.Testing?style=for-the-badge&label=EvilBaschdi.Testing

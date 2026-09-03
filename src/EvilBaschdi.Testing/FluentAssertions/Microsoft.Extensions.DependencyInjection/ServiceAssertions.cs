@@ -33,7 +33,7 @@ public class ServiceAssertions<TService>
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public ServiceAssertions<TService> WithCount(int expected, string because = "", params object[] becauseArgs)
     {
@@ -52,7 +52,7 @@ public class ServiceAssertions<TService>
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public ServiceAssertions<TService> WithImplementation<TImplementation>(string because = "", params object[] becauseArgs)
         where TImplementation : TService
@@ -97,15 +97,15 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
-    ///     Asserts that the service collection has a service registered with a factory function.
-    ///     This is used for services registered via AddSingleton(provider => ...), AddScoped(provider => ...), etc.
+    ///     Asserts that the service collection has a service registered with a factory function. This is used for services
+    ///     registered via AddSingleton(provider => ...), AddScoped(provider => ...), etc.
     /// </summary>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public ServiceAssertions<TService> WithFactory(string because = "", params object[] becauseArgs)
     {
@@ -127,14 +127,15 @@ public class ServiceAssertions<TService>
     ///     <see cref="IServiceProvider" /> and produce the same result type, without requiring real dependency resolution.
     /// </summary>
     /// <param name="expectedFactory">
-    ///     A factory function whose behavior (requested services and result type) is compared against the registered factory.
+    ///     A factory function whose behavior (requested services and result type) is compared against the registered
+    ///     factory.
     /// </param>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public ServiceAssertions<TService> WithFactory(Func<IServiceProvider, TService> expectedFactory, string because = "", params object[] becauseArgs)
     {
@@ -206,14 +207,14 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
-    ///     Asserts that the service collection <see cref="TService" /> are of lifespan Singleton
+    ///     Asserts that the service collection <typeparamref name="TService" /> are of lifespan Singleton
     /// </summary>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public AndConstraint<ServiceCollectionAssertions> AsSingleton(string because = "", params object[] becauseArgs)
     {
@@ -224,14 +225,14 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
-    ///     Asserts that the service collection <see cref="TService" /> are of lifespan Scoped
+    ///     Asserts that the service collection <typeparamref name="TService" /> are of lifespan Scoped
     /// </summary>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public AndConstraint<ServiceCollectionAssertions> AsScoped(string because = "", params object[] becauseArgs)
     {
@@ -242,14 +243,14 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
-    ///     Asserts that the service collection <see cref="TService" /> are of lifespan Transient
+    ///     Asserts that the service collection <typeparamref name="TService" /> are of lifespan Transient
     /// </summary>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
     /// </param>
     /// <param name="becauseArgs">
-    ///     Zero or more objects to format using the placeholders in <see cref="because" />.
+    ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
     public AndConstraint<ServiceCollectionAssertions> AsTransient(string because = "", params object[] becauseArgs)
     {
