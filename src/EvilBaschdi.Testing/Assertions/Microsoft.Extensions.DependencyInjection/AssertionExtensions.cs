@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using AwesomeAssertions.Execution;
 
-namespace EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection;
+namespace EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 ///     Provides extension methods for asserting the state of an IServiceCollection in unit tests.
@@ -13,5 +14,5 @@ public static class AssertionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to assert.</param>
     /// <returns>A <see cref="ServiceCollectionAssertions" /> object.</returns>
-    public static ServiceCollectionAssertions Should(this IServiceCollection services) => new(services);
+    public static ServiceCollectionAssertions Should(this IServiceCollection services) => new(services, AssertionChain.GetOrCreate());
 }

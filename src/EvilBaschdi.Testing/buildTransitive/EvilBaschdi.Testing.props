@@ -24,8 +24,8 @@
 		<Using Include="AutoFixture.Idioms" />
 		<Using Include="AutoFixture.Xunit3" />
 		<Using Include="EvilBaschdi.Testing" />
-		<Using Include="EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection" />
-		<Using Include="FluentAssertions" />
+		<Using Include="EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection" />
+		<Using Include="AwesomeAssertions" />
 		<Using Include="NSubstitute" />
 		<Using Include="NSubstitute.Arg" Alias="Arg" />
 		<Using Include="NSubstitute.ReturnsExtensions" />

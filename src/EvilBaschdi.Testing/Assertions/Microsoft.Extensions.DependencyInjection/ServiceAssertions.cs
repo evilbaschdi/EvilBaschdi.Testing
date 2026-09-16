@@ -1,7 +1,7 @@
-using FluentAssertions.Execution;
+using AwesomeAssertions.Execution;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection;
+namespace EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection;
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
@@ -13,12 +13,18 @@ public class ServiceAssertions<TService>
 {
     private readonly IServiceCollection _services;
     private readonly IReadOnlyList<ServiceDescriptor> _filteredServices;
+    private readonly AssertionChain _assertionChain;
     private int _count;
 
-    internal ServiceAssertions(IServiceCollection services, IEnumerable<ServiceDescriptor> filteredServices, int count)
+    internal ServiceAssertions(IServiceCollection services, IEnumerable<ServiceDescriptor> filteredServices, int count, AssertionChain assertionChain)
     {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(filteredServices);
+        ArgumentNullException.ThrowIfNull(assertionChain);
+
         _services = services;
-        _filteredServices = (filteredServices ?? []).ToList();
+        _filteredServices = [.. filteredServices];
+        _assertionChain = assertionChain;
         _count = count;
     }
 
@@ -87,7 +93,7 @@ public class ServiceAssertions<TService>
             found = "<unknown>";
         }
 
-        Execute.Assertion
+        _assertionChain
                .BecauseOf(because, becauseArgs)
                .FailWith("Expected {context:services} to have an implementation of type {0} registered, but found {1}.",
                    typeof(TImplementation),
@@ -112,7 +118,7 @@ public class ServiceAssertions<TService>
         // ReSharper disable once SimplifyLinqExpressionUseAll
         if (!_filteredServices.Any(service => service.ImplementationFactory != null))
         {
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
                        typeof(TService));
@@ -142,7 +148,7 @@ public class ServiceAssertions<TService>
         // ReSharper disable once SimplifyLinqExpressionUseAll
         if (!_filteredServices.Any(service => service.ImplementationFactory != null))
         {
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
                        typeof(TService));
@@ -159,7 +165,7 @@ public class ServiceAssertions<TService>
 
         if (!registeredRecorder.RequestedServiceTypes.SequenceEqual(expectedRecorder.RequestedServiceTypes))
         {
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} factory for {0} to request services [{1}], but it requested [{2}].",
                        typeof(TService),
@@ -169,7 +175,7 @@ public class ServiceAssertions<TService>
 
         if (registeredError == null && expectedError == null && registeredResultType != expectedResultType)
         {
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} factory for {0} to return type {1}, but it returned {2}.",
                        typeof(TService),
@@ -221,7 +227,7 @@ public class ServiceAssertions<TService>
         //check count for one service if count has not been specified
         CheckCount("Should only have one service");
         CheckLifetime(ServiceLifetime.Singleton, because, becauseArgs);
-        return new AndConstraint<ServiceCollectionAssertions>(new ServiceCollectionAssertions(_services));
+        return new AndConstraint<ServiceCollectionAssertions>(new ServiceCollectionAssertions(_services, _assertionChain));
     }
 
     /// <summary>
@@ -239,7 +245,7 @@ public class ServiceAssertions<TService>
         //check count for one service if count has not been specified
         CheckCount("Should only have one service");
         CheckLifetime(ServiceLifetime.Scoped, because, becauseArgs);
-        return new AndConstraint<ServiceCollectionAssertions>(new ServiceCollectionAssertions(_services));
+        return new AndConstraint<ServiceCollectionAssertions>(new ServiceCollectionAssertions(_services, _assertionChain));
     }
 
     /// <summary>
@@ -257,7 +263,7 @@ public class ServiceAssertions<TService>
         //check count for one service if count has not been specified
         CheckCount("Should only have one service");
         CheckLifetime(ServiceLifetime.Transient, because, becauseArgs);
-        return new AndConstraint<ServiceCollectionAssertions>(new ServiceCollectionAssertions(_services));
+        return new AndConstraint<ServiceCollectionAssertions>(new ServiceCollectionAssertions(_services, _assertionChain));
     }
 
     private void CheckLifetime(ServiceLifetime lifetime, string because, params object[] becauseArgs)
@@ -266,7 +272,7 @@ public class ServiceAssertions<TService>
         if (mismatch != null)
         {
             var service = mismatch;
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to have a {0} of type {1} registered, but found {2}.",
                        lifetime,
@@ -280,7 +286,7 @@ public class ServiceAssertions<TService>
         //check service count
         if (_filteredServices.Count != _count)
         {
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to have {0} service(s) of type {1} registered, but found {2}.",
                        _count,

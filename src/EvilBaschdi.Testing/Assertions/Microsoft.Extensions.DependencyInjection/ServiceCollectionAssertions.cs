@@ -1,8 +1,8 @@
-using FluentAssertions.Execution;
-using FluentAssertions.Primitives;
+using AwesomeAssertions.Primitives;
+using AwesomeAssertions.Execution;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection;
+namespace EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection;
 
 /// <inheritdoc />
 /// <summary>
@@ -14,13 +14,17 @@ namespace EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyIn
 #endif
 public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceCollection, ServiceCollectionAssertions>
 {
-    /// <inheritdoc />
+    private readonly AssertionChain _assertionChain;
+
     /// <summary>
+    /// Initializes a new instance of the <see cref="ServiceCollectionAssertions"/> class.
     /// </summary>
-    /// <param name="subject"></param>
-    internal ServiceCollectionAssertions(IServiceCollection subject)
-        : base(subject)
+    /// <param name="subject">The service collection to assert.</param>
+    /// <param name="assertionChain">The assertion chain used to execute the assertions.</param>
+    internal ServiceCollectionAssertions(IServiceCollection subject, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
+        _assertionChain = assertionChain;
     }
 
     /// <inheritdoc />
@@ -45,7 +49,7 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
         //IEnumerable<TService> see: https://github.com/fluentassertions/fluentassertions/blob/develop/Src/FluentAssertions/Collections/NonGenericCollectionAssertions.cs
         if (Subject is null)
         {
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to contain {0} item(s){reason}, but found <null>.", expected);
         }
@@ -53,7 +57,7 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
         {
             var actualCount = Subject.Count;
 
-            Execute.Assertion
+            _assertionChain
                    .ForCondition(actualCount == expected)
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to contain {0} item(s){reason}, but found {1}.", expected, actualCount);
@@ -83,13 +87,13 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
         var serviceDescriptors = services.ToList();
         if (!serviceDescriptors.Any())
         {
-            Execute.Assertion
+            _assertionChain
                    .BecauseOf(because, becauseArgs)
                    .FailWith("Expected {context:services} to have a service of type {0} registered, but found none.",
                        typeof(TService));
         }
 
-        return new ServiceAssertions<TService>(Subject, serviceDescriptors, 1);
+        return new ServiceAssertions<TService>(Subject, serviceDescriptors, 1, _assertionChain);
     }
 
     #region Helpers
