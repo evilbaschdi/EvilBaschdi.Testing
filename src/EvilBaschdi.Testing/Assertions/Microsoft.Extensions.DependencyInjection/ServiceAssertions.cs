@@ -94,10 +94,10 @@ public class ServiceAssertions<TService>
         }
 
         _assertionChain
-               .BecauseOf(because, becauseArgs)
-               .FailWith("Expected {context:services} to have an implementation of type {0} registered, but found {1}.",
-                   typeof(TImplementation),
-                   found);
+            .BecauseOf(because, becauseArgs)
+            .FailWith("Expected {context:services} to have an implementation of type {0} registered, but found {1}.",
+                typeof(TImplementation),
+                found);
 
         return this;
     }
@@ -119,9 +119,9 @@ public class ServiceAssertions<TService>
         if (!_filteredServices.Any(service => service.ImplementationFactory != null))
         {
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
-                       typeof(TService));
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
+                    typeof(TService));
         }
 
         return this;
@@ -149,9 +149,9 @@ public class ServiceAssertions<TService>
         if (!_filteredServices.Any(service => service.ImplementationFactory != null))
         {
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
-                       typeof(TService));
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
+                    typeof(TService));
             return this;
         }
 
@@ -166,21 +166,21 @@ public class ServiceAssertions<TService>
         if (!registeredRecorder.RequestedServiceTypes.SequenceEqual(expectedRecorder.RequestedServiceTypes))
         {
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} factory for {0} to request services [{1}], but it requested [{2}].",
-                       typeof(TService),
-                       string.Join(", ", expectedRecorder.RequestedServiceTypes.Select(t => t.FullName)),
-                       string.Join(", ", registeredRecorder.RequestedServiceTypes.Select(t => t.FullName)));
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} factory for {0} to request services [{1}], but it requested [{2}].",
+                    typeof(TService),
+                    string.Join(", ", expectedRecorder.RequestedServiceTypes.Select(t => t.FullName)),
+                    string.Join(", ", registeredRecorder.RequestedServiceTypes.Select(t => t.FullName)));
         }
 
         if (registeredError == null && expectedError == null && registeredResultType != expectedResultType)
         {
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} factory for {0} to return type {1}, but it returned {2}.",
-                       typeof(TService),
-                       expectedResultType,
-                       registeredResultType);
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} factory for {0} to return type {1}, but it returned {2}.",
+                    typeof(TService),
+                    expectedResultType,
+                    registeredResultType);
         }
 
         return this;
@@ -273,11 +273,11 @@ public class ServiceAssertions<TService>
         {
             var service = mismatch;
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to have a {0} of type {1} registered, but found {2}.",
-                       lifetime,
-                       service.ServiceType,
-                       service.Lifetime);
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to have a {0} of type {1} registered, but found {2}.",
+                    lifetime,
+                    service.ServiceType,
+                    service.Lifetime);
         }
     }
 
@@ -287,11 +287,11 @@ public class ServiceAssertions<TService>
         if (_filteredServices.Count != _count)
         {
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to have {0} service(s) of type {1} registered, but found {2}.",
-                       _count,
-                       typeof(TService),
-                       _filteredServices.Count);
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to have {0} service(s) of type {1} registered, but found {2}.",
+                    _count,
+                    typeof(TService),
+                    _filteredServices.Count);
         }
     }
 }

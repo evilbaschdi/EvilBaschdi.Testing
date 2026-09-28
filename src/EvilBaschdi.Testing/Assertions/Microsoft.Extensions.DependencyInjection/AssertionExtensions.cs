@@ -1,5 +1,5 @@
-using Microsoft.Extensions.DependencyInjection;
 using AwesomeAssertions.Execution;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection;
 

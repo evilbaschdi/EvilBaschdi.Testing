@@ -4,23 +4,23 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 [![Target: .NET 10.0](https://img.shields.io/badge/.NET-10.0-512bd4.svg?style=for-the-badge&logo=dotnet)](Directory.Build.props)
 
-Testing utilities, AutoFixture extensions, custom assertions, and FluentAssertions extensions for .NET and Microsoft.Extensions.DependencyInjection.
+Testing utilities, AutoFixture extensions, custom assertions, and AwesomeAssertions extensions for .NET and Microsoft.Extensions.DependencyInjection.
 
 ---
 
 ## 📈 Quality & Activity
 
-| Branch | Status & Activity |
-| :--- | :--- |
-| ![Main](https://img.shields.io/badge/branch-main-brightgreen?style=flat-square&logo=git&logoColor=white&color=c9ff00) | [![CodeFactor](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/main?style=flat-square)](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/main) ![Commit Activity Main](https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/main?style=flat-square) ![Last Commit Main](https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/main?style=flat-square) |
-| ![Develop](https://img.shields.io/badge/branch-develop-blue?style=flat-square&logo=git&logoColor=white&color=0080ff) | [![CodeFactor](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/develop?style=flat-square)](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/develop) ![Commit Activity Develop](https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/develop?style=flat-square) ![Last Commit Develop](https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/develop?style=flat-square) |
+| Branch                                                                                                                | Status & Activity                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :-------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Main](https://img.shields.io/badge/branch-main-brightgreen?style=flat-square&logo=git&logoColor=white&color=c9ff00) | [![CodeFactor](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/main?style=flat-square)](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/main) ![Commit Activity Main](https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/main?style=flat-square) ![Last Commit Main](https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/main?style=flat-square)                   |
+| ![Develop](https://img.shields.io/badge/branch-develop-blue?style=flat-square&logo=git&logoColor=white&color=0080ff)  | [![CodeFactor](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/badge/develop?style=flat-square)](https://www.codefactor.io/repository/github/evilbaschdi/EvilBaschdi.Testing/overview/develop) ![Commit Activity Develop](https://img.shields.io/github/commit-activity/m/evilbaschdi/EvilBaschdi.Testing/develop?style=flat-square) ![Last Commit Develop](https://img.shields.io/github/last-commit/evilbaschdi/EvilBaschdi.Testing/develop?style=flat-square) |
 
 ---
 
 ## 📦 Packages in this Repository
 
-| Package | Description | Sources |
-| :--- | :--- | :--- |
+| Package                                          | Description                                                                              | Sources                                                                                                                                                                                                                                                                                                                 |
+| :----------------------------------------------- | :--------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`EvilBaschdi.Testing`](src/EvilBaschdi.Testing) | AutoFixture custom data attributes, GuardClause assertions, and DI assertion extensions. | [![MyGet](https://img.shields.io/badge/MyGet-gray?style=flat-square&logo=myget)](https://myget.org/feed/evilbaschdi/package/nuget/EvilBaschdi.Testing) [![Codeberg](https://img.shields.io/badge/Codeberg-gray?style=flat-square&logo=codeberg)](https://codeberg.org/evilbaschdi/-/packages/nuget/EvilBaschdi.Testing) |
 
 ---
@@ -29,9 +29,9 @@ Testing utilities, AutoFixture extensions, custom assertions, and FluentAssertio
 
 All packages (Release and Preview builds) are published to **MyGet** and **Codeberg**. You only need to configure **one** of these feeds.
 
-| Registry | Feed URL |
-| :--- | :--- |
-| **MyGet** | `https://www.myget.org/F/evilbaschdi/api/v3/index.json` |
+| Registry     | Feed URL                                                         |
+| :----------- | :--------------------------------------------------------------- |
+| **MyGet**    | `https://www.myget.org/F/evilbaschdi/api/v3/index.json`          |
 | **Codeberg** | `https://codeberg.org/api/packages/evilbaschdi/nuget/index.json` |
 
 ### Add Feed via .NET CLI
@@ -149,14 +149,15 @@ public void VerifyAllAsyncMethodsHaveNullGuards(GuardClauseAssertion assertion)
 }
 ```
 
-### Fluent Assertions for `Microsoft.Extensions.DependencyInjection`
+### Assertions for `Microsoft.Extensions.DependencyInjection`
 
 Assert service registrations with lifetime and implementation validations:
 
 ```csharp
 using EvilBaschdi.Testing;
-using FluentAssertions;
+using AwesomeAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();
 services.AddSingleton<ISomeService, SomeService>();

@@ -1,5 +1,5 @@
-using AwesomeAssertions.Primitives;
 using AwesomeAssertions.Execution;
+using AwesomeAssertions.Primitives;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection;
@@ -17,7 +17,7 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
     private readonly AssertionChain _assertionChain;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ServiceCollectionAssertions"/> class.
+    ///     Initializes a new instance of the <see cref="ServiceCollectionAssertions" /> class.
     /// </summary>
     /// <param name="subject">The service collection to assert.</param>
     /// <param name="assertionChain">The assertion chain used to execute the assertions.</param>
@@ -45,22 +45,20 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
     /// </param>
     public AndConstraint<ServiceCollectionAssertions> HaveCount(int expected, string because = "", params object[] becauseArgs)
     {
-        //had to take the HaveCount function from fluent asserts library since IServiceCollection is not explicitlly
-        //IEnumerable<TService> see: https://github.com/fluentassertions/fluentassertions/blob/develop/Src/FluentAssertions/Collections/NonGenericCollectionAssertions.cs
         if (Subject is null)
         {
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to contain {0} item(s){reason}, but found <null>.", expected);
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to contain {0} item(s){reason}, but found <null>.", expected);
         }
         else
         {
             var actualCount = Subject.Count;
 
             _assertionChain
-                   .ForCondition(actualCount == expected)
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to contain {0} item(s){reason}, but found {1}.", expected, actualCount);
+                .ForCondition(actualCount == expected)
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to contain {0} item(s){reason}, but found {1}.", expected, actualCount);
         }
 
         return new AndConstraint<ServiceCollectionAssertions>(this);
@@ -88,9 +86,9 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
         if (!serviceDescriptors.Any())
         {
             _assertionChain
-                   .BecauseOf(because, becauseArgs)
-                   .FailWith("Expected {context:services} to have a service of type {0} registered, but found none.",
-                       typeof(TService));
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to have a service of type {0} registered, but found none.",
+                    typeof(TService));
         }
 
         return new ServiceAssertions<TService>(Subject, serviceDescriptors, 1, _assertionChain);

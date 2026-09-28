@@ -23,8 +23,8 @@ This package offers custom NSubstitute AutoData attributes and the required NuGe
     <Using Include="AutoFixture.Idioms" />
     <Using Include="AutoFixture.Xunit3" />
     <Using Include="EvilBaschdi.Testing" />
-    <Using Include="EvilBaschdi.Testing.FluentAssertions.Microsoft.Extensions.DependencyInjection" />
-    <Using Include="FluentAssertions" />
+    <Using Include="EvilBaschdi.Testing.Assertions.Microsoft.Extensions.DependencyInjection" />
+    <Using Include="AwesomeAssertions" />
     <Using Include="NSubstitute" />
     <Using Include="NSubstitute.Arg" Alias="Arg" />
     <Using Include="NSubstitute.ReturnsExtensions" />
@@ -39,11 +39,7 @@ This package offers custom NSubstitute AutoData attributes and the required NuGe
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="FluentAssertions.Analyzers">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Meziantou.FluentAssertionsAnalyzers">
+    <PackageReference Include="AwesomeAssertions.Analyzers">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
