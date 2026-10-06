@@ -6,7 +6,12 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
+  paths:
+    include:
+      - "src/*"
+      - "Directory.Build.props"
+      - "Directory.Packages.props"
 
 resources:
   repositories:
@@ -16,7 +21,7 @@ resources:
       ref: refs/heads/main # optional ref to pin to
 
 extends:
-  template: buildNPackMultiStage.yml@templates  # Template reference
+  template: buildNPackMultiStage.yml@templates # Template reference
   parameters:
     projects:
       - $(Build.Repository.Name)
