@@ -1,4 +1,4 @@
-#pragma warning disable MFA001
+#pragma warning disable FAA0002
 namespace EvilBaschdi.Testing.Tests;
 
 /// <summary>
