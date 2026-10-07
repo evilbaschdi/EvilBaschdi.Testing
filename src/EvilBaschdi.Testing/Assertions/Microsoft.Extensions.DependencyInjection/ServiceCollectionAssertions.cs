@@ -68,6 +68,7 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
     ///     Asserts that the service collection has the service
     /// </summary>
     /// <typeparam name="TService">The service to check</typeparam>
+    /// <param name="count">The expected number of services</param>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
     ///     is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
@@ -75,7 +76,7 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
     /// <param name="becauseArgs">
     ///     Zero or more objects to format using the placeholders in "because".
     /// </param>
-    public ServiceAssertions<TService> HaveService<TService>(string because = "", params object[] becauseArgs)
+    public ServiceAssertions<TService> HaveService<TService>(int count = 1, string because = "", params object[] becauseArgs)
     {
         NotBeNull();
 
@@ -87,11 +88,11 @@ public class ServiceCollectionAssertions : ReferenceTypeAssertions<IServiceColle
         {
             _assertionChain
                 .BecauseOf(because, becauseArgs)
-                .FailWith("Expected {context:services} to have a service of type {0} registered, but found none.",
+                .FailWith($"Expected {{context:services}} to have {count} service(s) of type {{0}} registered, but found none.",
                     typeof(TService));
         }
 
-        return new ServiceAssertions<TService>(Subject, serviceDescriptors, 1, _assertionChain);
+        return new ServiceAssertions<TService>(Subject, serviceDescriptors, count, _assertionChain);
     }
 
     #region Helpers
