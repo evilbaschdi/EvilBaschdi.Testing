@@ -15,6 +15,9 @@ public class ServiceCollectionAssertionsTest
         _services.AddSingleton<ISingleton, Singleton>();
         _services.AddTransient<ITransient, Transient>();
         _services.AddScoped<IScoped, Scoped>();
+        _services.AddScoped<IParentInterface, ChildOneClass>();
+        _services.AddScoped<IParentInterface, ChildTwoClass>();
+        _services.AddScoped<IParentInterface, ChildThreeClass>();
     }
 
     [Fact]
@@ -58,7 +61,7 @@ public class ServiceCollectionAssertionsTest
     [Fact]
     public void HaveCount_Should_Pass_When_Count_Matches()
     {
-        _services.Should().HaveCount(3);
+        _services.Should().HaveCount(6);
     }
 
     [Fact]
@@ -66,7 +69,7 @@ public class ServiceCollectionAssertionsTest
     {
         Action act = () => _services.Should().HaveCount(5);
 
-        act.Should().Throw<XunitException>().WithMessage("*5*3*");
+        act.Should().Throw<XunitException>().WithMessage("*5*6*");
     }
 
     [Fact]
@@ -84,7 +87,7 @@ public class ServiceCollectionAssertionsTest
     public void HaveCount_Should_Return_AndConstraint_For_Chaining()
     {
         _services.Should()
-                 .HaveCount(3)
+                 .HaveCount(6)
                  .And
                  .HaveService<ISingleton>()
                  .AsSingleton();
@@ -199,6 +202,97 @@ public class ServiceCollectionAssertionsTest
         act.Should().Throw<XunitException>();
     }
 
+    [Fact]
+    public void ServiceCollection_Should_Chain_Scoped()
+    {
+        _services.Should().HaveService<IParentInterface>(3).WithImplementation<ChildOneClass>().AsScoped();
+        _services.Should().HaveService<IParentInterface>(3).WithImplementation<ChildTwoClass>().AsScoped();
+        _services.Should().HaveService<IParentInterface>(3).WithImplementation<ChildThreeClass>().AsScoped();
+
+        _services.Should().HaveService<IParentInterface>(3)
+                 .WithImplementation<ChildOneClass>()
+                 .WithImplementationCount(1)
+                 .WithImplementation<ChildTwoClass>()
+                 .WithImplementationCount(1)
+                 .WithImplementation<ChildThreeClass>()
+                 .WithImplementationCount(1)
+                 .WithCount(3)
+                 .AsScoped();
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void WithImplementationCount_Should_Count_Only_Matching_Service_And_Implementation(int expected)
+    {
+        var services = new ServiceCollection();
+        services.AddScoped<IParentInterface, ChildTwoClass>();
+        services.AddScoped<ChildOneClass>();
+        services.AddScoped<IParentInterface>(_ => new ChildOneClass());
+        services.AddSingleton<IParentInterface>(new ChildOneClass());
+        for (var registration = 0; registration < expected; registration++)
+        {
+            services.AddScoped<IParentInterface, ChildOneClass>();
+        }
+
+        services.Should().HaveService<IParentInterface>(expected + 3)
+                .WithImplementation<ChildOneClass>()
+                .WithImplementationCount(expected)
+                .WithCount(expected + 3);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(2)]
+    public void WithImplementationCount_Should_Fail_When_Count_Does_Not_Match(int expected)
+    {
+        Action act = () => _services.Should().HaveService<IParentInterface>(3)
+                                    .WithImplementation<ChildOneClass>()
+                                    .WithImplementationCount(expected, "{0} is required", "uniqueness");
+
+        act.Should().Throw<XunitException>().WithMessage($"*{expected}*ChildOneClass*IParentInterface*because uniqueness is required*found 1*");
+    }
+
+    [Fact]
+    public void WithImplementationCount_Should_Not_Replace_Total_Service_Count()
+    {
+        Action act = () => _services.Should().HaveService<IParentInterface>()
+                                    .WithImplementation<ChildOneClass>()
+                                    .WithImplementationCount(1)
+                                    .AsScoped();
+
+        act.Should().Throw<XunitException>().WithMessage("*1 service(s)*IParentInterface*found 3*");
+    }
+
+    [Fact]
+    public void WithImplementationCount_Should_Use_Most_Recent_Implementation()
+    {
+        _services.AddScoped<IParentInterface, ChildTwoClass>();
+
+        _services.Should().HaveService<IParentInterface>(4)
+                 .WithImplementation<ChildOneClass>().WithImplementationCount(1)
+                 .WithImplementation<ChildTwoClass>().WithImplementationCount(2)
+                 .WithImplementation<ChildThreeClass>().WithImplementationCount(1)
+                 .AsScoped();
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void WithImplementationCount_Should_Require_Implementation_Selection(bool selectFactory)
+    {
+        _services.AddScoped<IParentInterface>(_ => new ChildOneClass());
+        var assertion = _services.Should().HaveService<IParentInterface>(4);
+        if (selectFactory)
+        {
+            assertion.WithImplementation<ChildOneClass>().WithFactory();
+        }
+
+        Action act = () => assertion.WithImplementationCount(1);
+
+        act.Should().Throw<InvalidOperationException>().WithMessage("*must follow WithImplementation<TImplementation>()*");
+    }
+
     #endregion
 
     #region Transient
@@ -247,6 +341,79 @@ public class ServiceCollectionAssertionsTest
     #endregion
 
     #region Factory-based Registrations
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void WithFactoryCount_Should_Count_Only_Factories_For_Service_Without_Invoking_Them(int expected)
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISingleton, Singleton>();
+        services.AddSingleton<ISingleton>(new Singleton());
+        services.AddSingleton<ITransient>(_ => new Transient());
+        for (var registration = 0; registration < expected; registration++)
+        {
+            services.AddSingleton<ISingleton>(_ => throw new InvalidOperationException("Factory must not be invoked"));
+        }
+
+        services.Should().HaveService<ISingleton>(expected + 2)
+                .WithFactory()
+                .WithFactoryCount(expected)
+                .WithCount(expected + 2)
+                .AsSingleton();
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(2)]
+    public void WithFactoryCount_Should_Fail_When_Count_Does_Not_Match(int expected)
+    {
+        _services.AddSingleton<ISingleton>(_ => new Singleton());
+        Action act = () => _services.Should().HaveService<ISingleton>(2)
+                                    .WithFactory().WithFactoryCount(expected, "{0} is required", "uniqueness");
+
+        act.Should().Throw<XunitException>().WithMessage($"*{expected} factory-based implementation(s)*ISingleton*because uniqueness is required*found 1*");
+    }
+
+    [Fact]
+    public void WithFactoryCount_Should_Not_Replace_Total_Service_Count()
+    {
+        _services.AddSingleton<ISingleton>(_ => new Singleton());
+        Action act = () => _services.Should().HaveService<ISingleton>()
+                                    .WithFactory()
+                                    .WithFactoryCount(1)
+                                    .AsSingleton();
+
+        act.Should().Throw<XunitException>().WithMessage("*1 service(s)*ISingleton*found 2*");
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void WithFactoryCount_Should_Require_Factory_Selection(bool selectImplementation)
+    {
+        _services.AddSingleton<ISingleton>(_ => new Singleton());
+        var assertion = _services.Should().HaveService<ISingleton>(2);
+        if (selectImplementation)
+        {
+            assertion.WithFactory().WithImplementation<Singleton>();
+        }
+
+        Action act = () => assertion.WithFactoryCount(1);
+
+        act.Should().Throw<InvalidOperationException>().WithMessage("*must follow WithFactory()*");
+    }
+
+    [Fact]
+    public void WithFactoryCount_Should_Follow_Expected_Factory_Selection()
+    {
+        _services.AddSingleton<ISingleton>(_ => new Singleton());
+
+        _services.Should().HaveService<ISingleton>(2)
+                 .WithImplementation<Singleton>().WithImplementationCount(1)
+                 .WithFactory(_ => new Singleton()).WithFactoryCount(1)
+                 .AsSingleton();
+    }
 
     [Fact]
     public void ServiceCollection_Should_Contain_Singleton_With_Factory()
@@ -477,10 +644,18 @@ public class ServiceCollectionAssertionsTest
     public class Transient : ITransient;
 
 #pragma warning disable CS9113 // Parameter is unread.
-    public class TransientWithDependency(object dependency) : ITransient;
+    public class TransientWithDependency(object _) : ITransient;
 #pragma warning restore CS9113 // Parameter is unread.
 
     public class Scoped : IScoped;
+
+    public interface IParentInterface : IScoped;
+
+    public class ChildOneClass : IParentInterface;
+
+    public class ChildTwoClass : IParentInterface;
+
+    public class ChildThreeClass : IParentInterface;
 
     #endregion
 }

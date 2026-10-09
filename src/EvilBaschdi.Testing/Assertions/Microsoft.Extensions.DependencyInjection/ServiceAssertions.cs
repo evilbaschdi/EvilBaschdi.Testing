@@ -13,19 +13,22 @@ public class ServiceAssertions<TService>
 {
     private readonly IServiceCollection _services;
     private readonly IReadOnlyList<ServiceDescriptor> _filteredServices;
-    private readonly AssertionChain _assertionChain;
     private int _count;
+    private readonly AssertionChain _assertionChain;
+    private Type _selectedImplementation;
+    private bool _factorySelected;
 
-    internal ServiceAssertions(IServiceCollection services, IEnumerable<ServiceDescriptor> filteredServices, int count, AssertionChain assertionChain)
+    internal ServiceAssertions(
+        IServiceCollection services,
+        IEnumerable<ServiceDescriptor> filteredServices,
+        int count,
+        AssertionChain assertionChain
+    )
     {
-        ArgumentNullException.ThrowIfNull(services);
-        ArgumentNullException.ThrowIfNull(filteredServices);
-        ArgumentNullException.ThrowIfNull(assertionChain);
-
         _services = services;
-        _filteredServices = [.. filteredServices];
-        _assertionChain = assertionChain;
+        _filteredServices = [.. filteredServices ?? []];
         _count = count;
+        _assertionChain = assertionChain;
     }
 
     /// <summary>
@@ -49,6 +52,65 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
+    ///     Asserts the number of registrations matching the most recent WithImplementation selection.
+    ///     Does not change the total service count checked by <see cref="WithCount" /> or lifetime assertions.
+    /// </summary>
+    /// <param name="expected">The expected number of matching registrations.</param>
+    /// <param name="because">A formatted phrase explaining why the assertion is needed.</param>
+    /// <param name="becauseArgs">Arguments for the placeholders in <paramref name="because" />.</param>
+    /// <exception cref="InvalidOperationException">The most recent selection was not WithImplementation.</exception>
+    public ServiceAssertions<TService> WithImplementationCount(int expected, string because = "", params object[] becauseArgs)
+    {
+        if (_selectedImplementation == null)
+        {
+            throw new InvalidOperationException("WithImplementationCount must follow WithImplementation<TImplementation>().");
+        }
+
+        var actualCount = _filteredServices.Count(service => service.ImplementationType == _selectedImplementation);
+        if (actualCount != expected)
+        {
+            _assertionChain
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to have {0} implementation(s) of type {1} for {2} registered{reason}, but found {3}.",
+                    expected,
+                    _selectedImplementation,
+                    typeof(TService),
+                    actualCount);
+        }
+
+        return this;
+    }
+
+    /// <summary>
+    ///     Asserts the number of factory-based registrations for <typeparamref name="TService" /> without invoking factories.
+    ///     Does not change the total service count checked by <see cref="WithCount" /> or lifetime assertions.
+    /// </summary>
+    /// <param name="expected">The expected number of factory-based registrations.</param>
+    /// <param name="because">A formatted phrase explaining why the assertion is needed.</param>
+    /// <param name="becauseArgs">Arguments for the placeholders in <paramref name="because" />.</param>
+    /// <exception cref="InvalidOperationException">The most recent selection was not WithFactory.</exception>
+    public ServiceAssertions<TService> WithFactoryCount(int expected, string because = "", params object[] becauseArgs)
+    {
+        if (!_factorySelected)
+        {
+            throw new InvalidOperationException("WithFactoryCount must follow WithFactory().");
+        }
+
+        var actualCount = _filteredServices.Count(service => service.ImplementationFactory != null);
+        if (actualCount != expected)
+        {
+            _assertionChain
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:services} to have {0} factory-based implementation(s) for {1} registered{reason}, but found {2}.",
+                    expected,
+                    typeof(TService),
+                    actualCount);
+        }
+
+        return this;
+    }
+
+    /// <summary>
     ///     Asserts that the service collection has a service registered with an implementation. To check if multiple
     ///     implementations are registered, simply chain method
     /// </summary>
@@ -63,6 +125,9 @@ public class ServiceAssertions<TService>
     public ServiceAssertions<TService> WithImplementation<TImplementation>(string because = "", params object[] becauseArgs)
         where TImplementation : TService
     {
+        _selectedImplementation = typeof(TImplementation);
+        _factorySelected = false;
+
         // ReSharper disable once SimplifyLinqExpressionUseAll
         if (_filteredServices.Any(service => service.ImplementationType == typeof(TImplementation)))
         {
@@ -93,6 +158,7 @@ public class ServiceAssertions<TService>
             found = "<unknown>";
         }
 
+        //Execute.Assertion
         _assertionChain
             .BecauseOf(because, becauseArgs)
             .FailWith("Expected {context:services} to have an implementation of type {0} registered, but found {1}.",
@@ -103,8 +169,8 @@ public class ServiceAssertions<TService>
     }
 
     /// <summary>
-    ///     Asserts that the service collection has a service registered with a factory function. This is used for services
-    ///     registered via AddSingleton(provider => ...), AddScoped(provider => ...), etc.
+    ///     Asserts that the service collection has a service registered with a factory function.
+    ///     This is used for services registered via AddSingleton(provider => ...), AddScoped(provider => ...), etc.
     /// </summary>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
@@ -115,9 +181,13 @@ public class ServiceAssertions<TService>
     /// </param>
     public ServiceAssertions<TService> WithFactory(string because = "", params object[] becauseArgs)
     {
+        _selectedImplementation = null;
+        _factorySelected = true;
+
         // ReSharper disable once SimplifyLinqExpressionUseAll
         if (!_filteredServices.Any(service => service.ImplementationFactory != null))
         {
+            //Execute.Assertion
             _assertionChain
                 .BecauseOf(because, becauseArgs)
                 .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
@@ -133,8 +203,7 @@ public class ServiceAssertions<TService>
     ///     <see cref="IServiceProvider" /> and produce the same result type, without requiring real dependency resolution.
     /// </summary>
     /// <param name="expectedFactory">
-    ///     A factory function whose behavior (requested services and result type) is compared against the registered
-    ///     factory.
+    ///     A factory function whose behavior (requested services and result type) is compared against the registered factory.
     /// </param>
     /// <param name="because">
     ///     A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
@@ -145,9 +214,13 @@ public class ServiceAssertions<TService>
     /// </param>
     public ServiceAssertions<TService> WithFactory(Func<IServiceProvider, TService> expectedFactory, string because = "", params object[] becauseArgs)
     {
+        _selectedImplementation = null;
+        _factorySelected = true;
+
         // ReSharper disable once SimplifyLinqExpressionUseAll
         if (!_filteredServices.Any(service => service.ImplementationFactory != null))
         {
+            //Execute.Assertion
             _assertionChain
                 .BecauseOf(because, becauseArgs)
                 .FailWith("Expected {context:services} to have a factory-based implementation registered for {0}, but found none.",
@@ -165,6 +238,7 @@ public class ServiceAssertions<TService>
 
         if (!registeredRecorder.RequestedServiceTypes.SequenceEqual(expectedRecorder.RequestedServiceTypes))
         {
+            //Execute.Assertion
             _assertionChain
                 .BecauseOf(because, becauseArgs)
                 .FailWith("Expected {context:services} factory for {0} to request services [{1}], but it requested [{2}].",
@@ -175,6 +249,7 @@ public class ServiceAssertions<TService>
 
         if (registeredError == null && expectedError == null && registeredResultType != expectedResultType)
         {
+            //Execute.Assertion
             _assertionChain
                 .BecauseOf(because, becauseArgs)
                 .FailWith("Expected {context:services} factory for {0} to return type {1}, but it returned {2}.",
@@ -272,6 +347,7 @@ public class ServiceAssertions<TService>
         if (mismatch != null)
         {
             var service = mismatch;
+            //Execute.Assertion
             _assertionChain
                 .BecauseOf(because, becauseArgs)
                 .FailWith("Expected {context:services} to have a {0} of type {1} registered, but found {2}.",
@@ -286,6 +362,7 @@ public class ServiceAssertions<TService>
         //check service count
         if (_filteredServices.Count != _count)
         {
+            //Execute.Assertion
             _assertionChain
                 .BecauseOf(because, becauseArgs)
                 .FailWith("Expected {context:services} to have {0} service(s) of type {1} registered, but found {2}.",
